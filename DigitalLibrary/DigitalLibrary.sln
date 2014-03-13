@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalLibrary", "DigitalLibrary\DigitalLibrary.csproj", "{50F95039-5A7F-485C-B940-41DFFF6E68E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{5549BBB4-8C1B-4914-BA6F-28649AB6CAFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalLibraryService", "DigitalLibraryService\DigitalLibraryService.csproj", "{117665F2-4D59-4E82-8462-A73AFD6A47E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{50F95039-5A7F-485C-B940-41DFFF6E68E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50F95039-5A7F-485C-B940-41DFFF6E68E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50F95039-5A7F-485C-B940-41DFFF6E68E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5549BBB4-8C1B-4914-BA6F-28649AB6CAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5549BBB4-8C1B-4914-BA6F-28649AB6CAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5549BBB4-8C1B-4914-BA6F-28649AB6CAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5549BBB4-8C1B-4914-BA6F-28649AB6CAFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{117665F2-4D59-4E82-8462-A73AFD6A47E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{117665F2-4D59-4E82-8462-A73AFD6A47E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{117665F2-4D59-4E82-8462-A73AFD6A47E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{117665F2-4D59-4E82-8462-A73AFD6A47E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
