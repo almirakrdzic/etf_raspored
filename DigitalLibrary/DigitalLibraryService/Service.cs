@@ -56,5 +56,43 @@ namespace DigitalLibraryService
             });
             db.SaveChanges();
         }
+        
+        public User AddedBy(int id)
+        {
+            var db = new DataLayer.DatabaseEntities();
+            var db_book = db.books.Where(boo => boo.id == id).FirstOrDefault();
+            int user_id = db_book.added_by;
+            var db_user = db.users.Where(u => u.id == user_id).FirstOrDefault();
+            var user = new User()
+            {                
+                FirstName = db_user.first_name,
+                LastName = db_user.last_name,
+                Type = new UserType()
+                {
+                    Id = db_user.type
+                },
+                Username = db_user.username           
+               
+            };
+
+            return user;
+        }
+
+
+
+
+        public Author GetAuthor(int id)
+        {
+            var db = new DataLayer.DatabaseEntities();
+            var dbAuthor = db.authors.Where(au => au.id == id).FirstOrDefault();
+            var author = new Author()
+            {
+                Id = dbAuthor.id,
+                FirstName = dbAuthor.first_name,
+                LastName = dbAuthor.last_name
+            };
+
+            return author;
+        }
     }
 }
