@@ -12,7 +12,7 @@ namespace DigitalLibraryService.Contracts
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public string Title { get; set; }
+        public string Title { get;  set; }
         [DataMember]
         public string ISBN { get; set;  }
         [DataMember]

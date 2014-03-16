@@ -11,7 +11,7 @@ namespace DigitalLibraryService.Contracts
     public class Author
     {
         [DataMember]
-        public int Id { get; set; }
+        public int Id { get; set ; }
         [DataMember]
         public string FirstName { get; set;  }
         [DataMember]

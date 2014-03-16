@@ -73,6 +73,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Author.cs" />
+    <Compile Include="Contracts\Book.cs" />
+    <Compile Include="Contracts\Genre.cs" />
     <Compile Include="Contracts\User.cs" />
     <Compile Include="Contracts\UserType.cs" />
     <Compile Include="Helpers\Salt.cs" />

@@ -10,7 +10,7 @@ namespace DigitalLibraryService.Contracts
     public class Genre
     {
          [DataMember]
-         public int Id { get; set; }
+         public int Id { get;  set; }
 
          [DataMember]
          public string Name { get; set;  }
