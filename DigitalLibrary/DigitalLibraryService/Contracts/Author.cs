@@ -9,12 +9,12 @@ namespace DigitalLibraryService.Contracts
 {
     [DataContract]
     public class Author
-    { 
+    {
         [DataMember]
         public int Id { get; set; }
-         [DataMember]
+        [DataMember]
         public string FirstName { get; set; }
-         [DataMember]
+        [DataMember]
         public string LastName { get; set; }
     }
 }

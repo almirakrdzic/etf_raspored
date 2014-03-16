@@ -13,15 +13,15 @@ namespace DigitalLibraryService.Contracts
         public int Id { get; set; }
         [DataMember]
         public string Title { get; set; }
-        [DataMember]  
+        [DataMember]
         public string ISBN { get; set; }
-         [DataMember]
+        [DataMember]
         public string Edition { get; set; }
-         [DataMember]
+        [DataMember]
         public string Description { get; set; }
-         [DataMember]
+        [DataMember]
         public string Content { get; set; }
-         [DataMember]
+        [DataMember]
         public User AddedBy { get; set; }
 
 
