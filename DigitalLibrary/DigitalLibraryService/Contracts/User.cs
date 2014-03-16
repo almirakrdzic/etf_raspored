@@ -28,7 +28,7 @@ namespace DigitalLibraryService.Contracts
         public string LastName { get; set; }
 
         [DataMember]
-        public string Email { get; set; }
+        public string Email { get; set;  }
 
         [DataMember]
         public UserType Type { get; set; }
