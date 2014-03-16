@@ -14,7 +14,7 @@ namespace DigitalLibraryService.Contracts
         [DataMember]
         public string Title { get; set; }
         [DataMember]
-        public string ISBN { get; set; }
+        public string ISBN { get; set;  }
         [DataMember]
         public string Edition { get; set; }
         [DataMember]
