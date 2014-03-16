@@ -22,6 +22,9 @@ namespace DataLayer
         public int id { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
+        public string biography { get; set; }
+        public Nullable<System.DateTime> birth_date { get; set; }
+        public Nullable<bool> active { get; set; }
     
         public virtual ICollection<book> books { get; set; }
     }

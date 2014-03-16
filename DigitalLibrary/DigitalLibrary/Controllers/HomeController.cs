@@ -16,7 +16,7 @@ namespace DigitalLibrary.Controllers
             Service s = new Service();
             s.AddNewUser(new DigitalLibraryService.Contracts.User()
             {
-                Id=1,
+                Id=3,
                 FirstName="Kresimir",
                 LastName="Galic",
                 Password = "password",

@@ -21,6 +21,7 @@ namespace DataLayer
     
         public int id { get; set; }
         public string name { get; set; }
+        public Nullable<bool> active { get; set; }
     
         public virtual ICollection<book> books { get; set; }
     }

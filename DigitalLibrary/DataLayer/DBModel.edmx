@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="digital_libraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="digital_libraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="digital_libraryModelStoreContainer">
           <EntitySet Name="authors" EntityType="digital_libraryModel.Store.authors" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="book_author" EntityType="digital_libraryModel.Store.book_author" store:Type="Tables" store:Schema="dbo" store:Name="book_author">
@@ -69,6 +69,9 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="first_name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="last_name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="biography" Type="ntext" />
+          <Property Name="birth_date" Type="date" />
+          <Property Name="active" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'digital_library.dbo.book_author' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -103,6 +106,7 @@
           <Property Name="description" Type="varchar(max)" />
           <Property Name="data" Type="varbinary(max)" Nullable="false" />
           <Property Name="added_by" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'digital_library.dbo.downloaded_books' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -121,6 +125,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="active" Type="bit" />
         </EntityType>
         <EntityType Name="user_types">
           <Key>
@@ -128,6 +133,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="active" Type="bit" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -141,6 +147,7 @@
           <Property Name="last_name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" />
         </EntityType>
         <Association Name="FK_author_id">
           <End Role="authors" Type="digital_libraryModel.Store.authors" Multiplicity="1" />
@@ -238,8 +245,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="digital_libraryModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -278,6 +284,9 @@
           <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="books" Relationship="digital_libraryModel.book_author" FromRole="authors" ToRole="books" />
+          <Property Type="String" Name="biography" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="birth_date" Precision="0" />
+          <Property Type="Boolean" Name="active" />
         </EntityType>
         <EntityType Name="book">
           <Key>
@@ -294,6 +303,7 @@
           <NavigationProperty Name="authors" Relationship="digital_libraryModel.book_author" FromRole="books" ToRole="authors" />
           <NavigationProperty Name="genres" Relationship="digital_libraryModel.book_genre" FromRole="books" ToRole="genre" />
           <NavigationProperty Name="users" Relationship="digital_libraryModel.downloaded_books" FromRole="books" ToRole="users" />
+          <Property Type="Boolean" Name="active" />
         </EntityType>
         <EntityType Name="genre">
           <Key>
@@ -302,6 +312,7 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="books" Relationship="digital_libraryModel.book_genre" FromRole="genre" ToRole="books" />
+          <Property Type="Boolean" Name="active" />
         </EntityType>
         <EntityType Name="user_types">
           <Key>
@@ -310,6 +321,7 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="users" Relationship="digital_libraryModel.FK_user_type" FromRole="user_types" ToRole="users" />
+          <Property Type="Boolean" Name="active" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -326,6 +338,7 @@
           <NavigationProperty Name="books" Relationship="digital_libraryModel.FK_books_added" FromRole="users" ToRole="books" />
           <NavigationProperty Name="user_types" Relationship="digital_libraryModel.FK_user_type" FromRole="users" ToRole="user_types" />
           <NavigationProperty Name="books1" Relationship="digital_libraryModel.downloaded_books" FromRole="users" ToRole="books" />
+          <Property Type="Boolean" Name="active" />
         </EntityType>
         <Association Name="FK_books_added">
           <End Role="users" Type="digital_libraryModel.user" Multiplicity="1" />
@@ -372,6 +385,9 @@
           <EntitySetMapping Name="authors">
             <EntityTypeMapping TypeName="digital_libraryModel.author">
               <MappingFragment StoreEntitySet="authors">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="biography" ColumnName="biography" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
@@ -381,6 +397,7 @@
           <EntitySetMapping Name="books">
             <EntityTypeMapping TypeName="digital_libraryModel.book">
               <MappingFragment StoreEntitySet="books">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="isbn" ColumnName="isbn" />
@@ -394,6 +411,7 @@
           <EntitySetMapping Name="genres">
             <EntityTypeMapping TypeName="digital_libraryModel.genre">
               <MappingFragment StoreEntitySet="genre">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
@@ -402,6 +420,7 @@
           <EntitySetMapping Name="user_types">
             <EntityTypeMapping TypeName="digital_libraryModel.user_types">
               <MappingFragment StoreEntitySet="user_types">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
@@ -410,6 +429,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="digital_libraryModel.user">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />

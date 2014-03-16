@@ -28,6 +28,7 @@ namespace DataLayer
         public string last_name { get; set; }
         public string email { get; set; }
         public int type { get; set; }
+        public Nullable<bool> active { get; set; }
     
         public virtual ICollection<book> books { get; set; }
         public virtual user_types user_types { get; set; }

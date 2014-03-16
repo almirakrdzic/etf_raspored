@@ -28,6 +28,7 @@ namespace DataLayer
         public string description { get; set; }
         public byte[] data { get; set; }
         public int added_by { get; set; }
+        public Nullable<bool> active { get; set; }
     
         public virtual user user { get; set; }
         public virtual ICollection<author> authors { get; set; }
