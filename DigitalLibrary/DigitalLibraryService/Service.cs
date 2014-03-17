@@ -110,5 +110,20 @@ namespace DigitalLibraryService
             return book;
         }
 
+        public Genre GetGenreWithId(int id)
+        {
+
+            var db = new DataLayer.DatabaseEntities();
+            var dbGenre = db.genres.Where(ge => ge.id == id).FirstOrDefault();
+            var genre = new Genre()
+            {
+                Id = dbGenre.id,
+                Name=dbGenre.name
+
+            };
+
+            return genre;
+        }
+
     }
 }
