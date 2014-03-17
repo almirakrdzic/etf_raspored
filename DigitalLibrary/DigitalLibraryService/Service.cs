@@ -79,8 +79,6 @@ namespace DigitalLibraryService
         }
 
 
-
-
         public Author GetAuthor(int id)
         {
             var db = new DataLayer.DatabaseEntities();
@@ -94,5 +92,23 @@ namespace DigitalLibraryService
 
             return author;
         }
+
+        public Book GetBookWithId(int id) {
+
+            var db = new DataLayer.DatabaseEntities();
+            var dbBook = db.books.Where(boo => boo.id == id).FirstOrDefault();
+            var book = new Book()
+            {
+                Id = dbBook.id,
+                Title = dbBook.title,
+                ISBN = dbBook.isbn,
+                Edition= dbBook.edition,
+                Description= dbBook.description
+           
+            };
+
+            return book;
+        }
+
     }
 }
