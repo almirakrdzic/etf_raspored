@@ -125,5 +125,41 @@ namespace DigitalLibraryService
             return genre;
         }
 
+
+
+        public List<Book> GetBooksForGenre(int genreId)
+        {
+            List<Book> books = new List<Book>();
+            using (var db = new DataLayer.DatabaseEntities())
+            {
+                var currentGenre = db.genres.Where(genre => genre.id == genreId).FirstOrDefault();
+                if (currentGenre == null)
+                {
+                    throw new Exception("Genre with selected ID does not exist!");
+                }
+                books = currentGenre.books.Select(book => book.ToContract()).ToList();
+            }
+            return books;
+        }
+
+
+        public Author GetAuthorWithId(int authorId)
+        {
+            Author newAuthor = null;
+
+            using (var db = new DataLayer.DatabaseEntities())
+            {
+                var author = db.authors.Where(auth => auth.id == authorId).FirstOrDefault();
+                if (author == null)
+                {
+                    throw new Exception("Author with selected ID does not exist!");
+                }
+                newAuthor = author.ToContract();
+            }
+
+
+            return newAuthor;
+
+        }
     }
 }

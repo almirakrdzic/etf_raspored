@@ -20,7 +20,7 @@ namespace DigitalLibraryService.Contracts
         [DataMember]
         public string Description { get; set; }
         [DataMember]
-        public string Content { get; set; }
+        public byte[] Content { get; set; }
         [DataMember]
         public User AddedBy { get; set; }
 

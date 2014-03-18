@@ -80,6 +80,7 @@
     <Compile Include="Contracts\Genre.cs" />
     <Compile Include="Contracts\User.cs" />
     <Compile Include="Contracts\UserType.cs" />
+    <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\Salt.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

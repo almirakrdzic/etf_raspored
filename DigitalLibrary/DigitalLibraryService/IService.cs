@@ -25,5 +25,11 @@ namespace DigitalLibraryService
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "genres/id/{id}")]
         Genre GetGenreWithId(int genreId);
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "books/genres/{genreId}")]
+        List<Book> GetBooksForGenre(int genreId);
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "authors/id/{authorId}")]
+        Author GetAuthorWithId(int authorId);
     }
 }
