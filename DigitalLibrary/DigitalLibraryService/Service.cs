@@ -96,18 +96,21 @@ namespace DigitalLibraryService
         public Book GetBookWithId(int id) {
 
             var db = new DataLayer.DatabaseEntities();
-            var dbBook = db.books.Where(boo => boo.id == id).FirstOrDefault();
-            var book = new Book()
+            var book = db.books.Where(boo => boo.id == id).FirstOrDefault();
+            var newBook = new Book()
             {
-                Id = dbBook.id,
-                Title = dbBook.title,
-                ISBN = dbBook.isbn,
-                Edition= dbBook.edition,
-                Description= dbBook.description
-           
+                Id = book.id,
+                AddedBy = new User()
+                {
+                    Id = book.added_by
+                },
+                Description = book.description,
+                Edition = book.edition,
+                ISBN = book.isbn,
+                Title = book.title,
+                Content = book.data
             };
-
-            return book;
+            return newBook;
         }
 
         public Genre GetGenreWithId(int id)
