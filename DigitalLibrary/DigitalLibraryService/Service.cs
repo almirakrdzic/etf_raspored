@@ -164,5 +164,25 @@ namespace DigitalLibraryService
             return newAuthor;
 
         }
+
+        public User GetUser(int userId)
+        {
+            User newUser = null;
+
+            using (var db = new DataLayer.DatabaseEntities())
+            {
+                var user = db.users.Where(us => us.id == userId).FirstOrDefault();
+                if (user == null)
+                {
+                    throw new Exception("Author with selected ID does not exist!");
+                }
+                newUser = user.ToContract();
+            }
+
+
+            return newUser;
+
+        }
+
     }
 }
