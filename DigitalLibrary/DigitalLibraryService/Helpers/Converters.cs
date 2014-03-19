@@ -37,5 +37,19 @@ namespace DigitalLibraryService.Helpers
             };
             return newAuthor;
         }
+
+        public static User ToContract(this DataLayer.user user)
+        {
+            User newUser = new User()
+            {
+                Id = user.id,
+                Username = user.username,
+                FirstName = user.first_name,
+                LastName = user.last_name,
+                Email = user.email
+
+            };
+            return newUser;
+        }
     }
 }
