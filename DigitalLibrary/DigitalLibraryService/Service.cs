@@ -193,9 +193,8 @@ namespace DigitalLibraryService
 
             return newUser;
 
+
         }
-
-
 
         public List<Book> GetDownloadedBooks(string userId)
         {
@@ -325,5 +324,6 @@ namespace DigitalLibraryService
         {
             throw new NotImplementedException();
         }
+
     }
 }
