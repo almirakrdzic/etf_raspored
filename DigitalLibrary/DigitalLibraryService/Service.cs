@@ -174,7 +174,7 @@ namespace DigitalLibraryService
                 var user = db.users.Where(us => us.id == userId).FirstOrDefault();
                 if (user == null)
                 {
-                    throw new Exception("Author with selected ID does not exist!");
+                    throw new Exception("User with selected ID does not exist!");
                 }
                 newUser = user.ToContract();
             }
@@ -184,5 +184,33 @@ namespace DigitalLibraryService
 
         }
 
+
+
+        public List<Book> GetDownloadedBooks(int userId)
+        {
+            List<Book> downloadedBooks = new List<Book>();
+            var db = new DataLayer.DatabaseEntities();
+            var user = db.users.Where(us => us.id == userId).FirstOrDefault();
+            if (user == null)
+            {
+                throw new Exception("User with selected ID does not exist!");
+            }
+            downloadedBooks = user.books1.Select(book => book.ToContract()).ToList();
+            return downloadedBooks;
+        }
+
+
+        public List<Book> GetBooksForAuthor(int authorId)
+        {
+            List<Book> books = new List<Book>();
+            var db = new DataLayer.DatabaseEntities();
+            var author = db.authors.Where(aut => aut.id == authorId).FirstOrDefault();
+            if (author == null)
+            {
+                throw new Exception("Author with selected ID does not exist!");
+            }
+            books = author.books.Select(book => book.ToContract()).ToList();
+            return books;
+        }
     }
 }
