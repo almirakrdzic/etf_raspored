@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Collections;
 using System.Data.Linq;
-using DigitalLibraryService.Contracts;
+using DigitalLibraryContracts;
 using DigitalLibraryService.Helpers;
 using System.ServiceModel.Activation;
 
@@ -14,7 +14,7 @@ namespace DigitalLibraryService
          RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service : IService
     {
-        public Contracts.User Login(string username, string password)
+        public User Login(string username, string password)
         {
             var db =new  DataLayer.DatabaseEntities();
             var currentUser= db.users.Where(user => user.username == username && user.password == password).FirstOrDefault();

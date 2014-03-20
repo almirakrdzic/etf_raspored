@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalLibraryService", "DigitalLibraryService\DigitalLibraryService.csproj", "{117665F2-4D59-4E82-8462-A73AFD6A47E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalLibraryContracts", "DigitalLibraryContracts\DigitalLibraryContracts.csproj", "{76C40AF5-BD82-4229-802E-67D200CC5628}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{117665F2-4D59-4E82-8462-A73AFD6A47E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{117665F2-4D59-4E82-8462-A73AFD6A47E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{117665F2-4D59-4E82-8462-A73AFD6A47E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76C40AF5-BD82-4229-802E-67D200CC5628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76C40AF5-BD82-4229-802E-67D200CC5628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76C40AF5-BD82-4229-802E-67D200CC5628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76C40AF5-BD82-4229-802E-67D200CC5628}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

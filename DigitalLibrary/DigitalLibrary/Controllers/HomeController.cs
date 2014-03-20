@@ -1,4 +1,5 @@
-﻿using DigitalLibraryService;
+﻿using DigitalLibraryContracts;
+using DigitalLibraryService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,13 @@ namespace DigitalLibrary.Controllers
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             Service s = new Service();
-            s.AddNewUser(new DigitalLibraryService.Contracts.User()
+            s.AddNewUser(new User()
             {
                 Id=3,
                 FirstName="Kresimir",
                 LastName="Galic",
                 Password = "password",
-                Type=new DigitalLibraryService.Contracts.UserType()
+                Type=new UserType()
                 {
                     Id=1
                 },

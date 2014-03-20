@@ -311,6 +311,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DigitalLibraryContracts\DigitalLibraryContracts.csproj">
+      <Project>{76c40af5-bd82-4229-802e-67d200cc5628}</Project>
+      <Name>DigitalLibraryContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DigitalLibraryService\DigitalLibraryService.csproj">
       <Project>{117665f2-4d59-4e82-8462-a73afd6a47e0}</Project>
       <Name>DigitalLibraryService</Name>

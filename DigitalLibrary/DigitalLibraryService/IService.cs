@@ -1,4 +1,4 @@
-﻿using DigitalLibraryService.Contracts;
+﻿using DigitalLibraryContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
