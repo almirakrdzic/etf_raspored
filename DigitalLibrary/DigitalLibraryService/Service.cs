@@ -18,8 +18,8 @@ namespace DigitalLibraryService
     {
         public User Login(string username, string password)
         {
-            var db =new  DataLayer.DatabaseEntities();
-            var currentUser= db.users.Where(user => user.username == username && user.password == password).FirstOrDefault();
+            var db = new DataLayer.DatabaseEntities();
+            var currentUser = db.users.Where(user => user.username == username && user.password == password).FirstOrDefault();
             if (currentUser == null)
             {
                 throw new Exception("User not found");
@@ -32,7 +32,7 @@ namespace DigitalLibraryService
                 Type = new UserType()
                 {
                     Id = currentUser.type,
-                    Name=currentUser.user_types.name
+                    Name = currentUser.user_types.name
                 },
                 Username = username,
                 Password = password,
@@ -48,18 +48,18 @@ namespace DigitalLibraryService
             var db = new DataLayer.DatabaseEntities();
             db.users.Add(new DataLayer.user()
             {
-                username=newUser.Username,
-                password=newUser.Password,
-                type=newUser.Type.Id,
-                first_name=newUser.FirstName,
-                email=newUser.Email,
-                last_name=newUser.LastName,
-                active=true
-                
+                username = newUser.Username,
+                password = newUser.Password,
+                type = newUser.Type.Id,
+                first_name = newUser.FirstName,
+                email = newUser.Email,
+                last_name = newUser.LastName,
+                active = true
+
             });
             db.SaveChanges();
         }
-        
+
         public User AddedBy(int id)
         {
             var db = new DataLayer.DatabaseEntities();
@@ -67,16 +67,16 @@ namespace DigitalLibraryService
             int user_id = db_book.added_by;
             var db_user = db.users.Where(u => u.id == user_id).FirstOrDefault();
             var user = new User()
-            {                
+            {
                 FirstName = db_user.first_name,
                 LastName = db_user.last_name,
                 Type = new UserType()
                 {
                     Id = db_user.type
                 },
-                Username = db_user.username         ,
-                IsActive=true
-               
+                Username = db_user.username,
+                IsActive = true
+
             };
 
             return user;
@@ -86,7 +86,7 @@ namespace DigitalLibraryService
         public Author GetAuthor(string authorId)
         {
             var db = new DataLayer.DatabaseEntities();
-            var id = int.Parse(authorId); 
+            var id = int.Parse(authorId);
             var dbAuthor = db.authors.Where(au => au.id == id).FirstOrDefault();
             var author = new Author()
             {
@@ -98,11 +98,12 @@ namespace DigitalLibraryService
             return author;
         }
 
-        public Book GetBookWithId(string bookId) {
+        public Book GetBookWithId(string bookId)
+        {
 
             var db = new DataLayer.DatabaseEntities();
 
-            var id = int.Parse(bookId); 
+            var id = int.Parse(bookId);
             var book = db.books.Where(boo => boo.id == id).FirstOrDefault();
             var newBook = new Book()
             {
@@ -122,13 +123,13 @@ namespace DigitalLibraryService
 
         public Genre GetGenreWithId(string genreId)
         {
-            var id = int.Parse(genreId); 
+            var id = int.Parse(genreId);
             var db = new DataLayer.DatabaseEntities();
             var dbGenre = db.genres.Where(ge => ge.id == id).FirstOrDefault();
             var genre = new Genre()
             {
                 Id = dbGenre.id,
-                Name=dbGenre.name
+                Name = dbGenre.name
 
             };
 
@@ -140,7 +141,7 @@ namespace DigitalLibraryService
             List<Book> books = new List<Book>();
             using (var db = new DataLayer.DatabaseEntities())
             {
-                var id= int.Parse(genreId);
+                var id = int.Parse(genreId);
                 var currentGenre = db.genres.Where(genre => genre.id == id).FirstOrDefault();
                 if (currentGenre == null)
                 {
