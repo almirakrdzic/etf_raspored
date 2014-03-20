@@ -228,7 +228,7 @@ namespace DigitalLibraryService
             {
                 throw new Exception("There are no user types present!");
             }
-            usertypes = utypes.Select(utype => utype.ToContract()).ToList();
+            usertypes = utypes.ToList().Select(utype => Converters.ToContract(utype)).ToList();
             return usertypes;
         }
 
