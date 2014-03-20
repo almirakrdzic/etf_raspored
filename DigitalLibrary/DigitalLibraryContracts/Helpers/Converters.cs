@@ -50,5 +50,16 @@ namespace DigitalLibraryContracts
             };
             return newUser;
         }
+
+        public static UserType ToContract(this DataLayer.user_types usertype)
+        {
+            UserType utype = new UserType()
+            {
+                Id = usertype.id,
+                Name = usertype.name
+            };
+
+            return utype;
+        }
     }
 }
