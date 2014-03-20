@@ -8,27 +8,33 @@ using System.Web.Mvc;
 
 namespace DigitalLibrary.Controllers
 {
-    public class HomeController : Controller
+    public class UserController : Controller
     {
+        //
+        // GET: /User/
+
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Create()
         {
-            ViewBag.Message = "Your app description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult Create(User user)
         {
-            ViewBag.Message = "Your contact page.";
+            Service s = new Service();
+            user.Type = new UserType()
+            {
+                Id = 1
+            };
+            s.AddNewUser(user);
 
             return View();
         }
+
     }
 }

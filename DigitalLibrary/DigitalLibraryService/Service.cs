@@ -7,11 +7,13 @@ using System.Data.Linq;
 using DigitalLibraryContracts;
 using DigitalLibraryService.Helpers;
 using System.ServiceModel.Activation;
+using System.ServiceModel;
 
 namespace DigitalLibraryService
 {
     [AspNetCompatibilityRequirements(
          RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any)]
     public class Service : IService
     {
         public User Login(string username, string password)
@@ -29,7 +31,8 @@ namespace DigitalLibraryService
                 LastName = currentUser.last_name,
                 Type = new UserType()
                 {
-                    Id = currentUser.type
+                    Id = currentUser.type,
+                    Name=currentUser.user_types.name
                 },
                 Username = username,
                 Password = password,
@@ -45,13 +48,13 @@ namespace DigitalLibraryService
             var db = new DataLayer.DatabaseEntities();
             db.users.Add(new DataLayer.user()
             {
-                id=newUser.Id,
                 username=newUser.Username,
                 password=newUser.Password,
                 type=newUser.Type.Id,
                 first_name=newUser.FirstName,
                 email=newUser.Email,
-                last_name=newUser.LastName
+                last_name=newUser.LastName,
+                active=true
                 
             });
             db.SaveChanges();
@@ -71,7 +74,8 @@ namespace DigitalLibraryService
                 {
                     Id = db_user.type
                 },
-                Username = db_user.username           
+                Username = db_user.username         ,
+                IsActive=true
                
             };
 
@@ -79,9 +83,10 @@ namespace DigitalLibraryService
         }
 
 
-        public Author GetAuthor(int id)
+        public Author GetAuthor(string authorId)
         {
             var db = new DataLayer.DatabaseEntities();
+            var id = int.Parse(authorId); 
             var dbAuthor = db.authors.Where(au => au.id == id).FirstOrDefault();
             var author = new Author()
             {
@@ -93,9 +98,11 @@ namespace DigitalLibraryService
             return author;
         }
 
-        public Book GetBookWithId(int id) {
+        public Book GetBookWithId(string bookId) {
 
             var db = new DataLayer.DatabaseEntities();
+
+            var id = int.Parse(bookId); 
             var book = db.books.Where(boo => boo.id == id).FirstOrDefault();
             var newBook = new Book()
             {
@@ -113,9 +120,9 @@ namespace DigitalLibraryService
             return newBook;
         }
 
-        public Genre GetGenreWithId(int id)
+        public Genre GetGenreWithId(string genreId)
         {
-
+            var id = int.Parse(genreId); 
             var db = new DataLayer.DatabaseEntities();
             var dbGenre = db.genres.Where(ge => ge.id == id).FirstOrDefault();
             var genre = new Genre()
@@ -128,17 +135,16 @@ namespace DigitalLibraryService
             return genre;
         }
 
-
-
-        public List<Book> GetBooksForGenre(int genreId)
+        public List<Book> GetBooksForGenre(string genreId)
         {
             List<Book> books = new List<Book>();
             using (var db = new DataLayer.DatabaseEntities())
             {
-                var currentGenre = db.genres.Where(genre => genre.id == genreId).FirstOrDefault();
+                var id= int.Parse(genreId);
+                var currentGenre = db.genres.Where(genre => genre.id == id).FirstOrDefault();
                 if (currentGenre == null)
                 {
-                    throw new Exception("Genre with selected ID does not exist!");
+                    throw new FaultException("Genre with selected ID does not exist!");
                 }
                 books = currentGenre.books.Select(book => book.ToContract()).ToList();
             }
@@ -146,16 +152,18 @@ namespace DigitalLibraryService
         }
 
 
-        public Author GetAuthorWithId(int authorId)
+        public Author GetAuthorWithId(string authorId)
         {
             Author newAuthor = null;
 
             using (var db = new DataLayer.DatabaseEntities())
             {
-                var author = db.authors.Where(auth => auth.id == authorId).FirstOrDefault();
+
+                var id = int.Parse(authorId);
+                var author = db.authors.Where(auth => auth.id == id).FirstOrDefault();
                 if (author == null)
                 {
-                    throw new Exception("Author with selected ID does not exist!");
+                    throw new FaultException("Author with selected ID does not exist!");
                 }
                 newAuthor = author.ToContract();
             }
@@ -165,13 +173,15 @@ namespace DigitalLibraryService
 
         }
 
-        public User GetUser(int userId)
+        public User GetUser(string userId)
         {
             User newUser = null;
 
             using (var db = new DataLayer.DatabaseEntities())
             {
-                var user = db.users.Where(us => us.id == userId).FirstOrDefault();
+                var id = int.Parse(userId);
+
+                var user = db.users.Where(us => us.id == id).FirstOrDefault();
                 if (user == null)
                 {
                     throw new Exception("User with selected ID does not exist!");
@@ -186,11 +196,13 @@ namespace DigitalLibraryService
 
 
 
-        public List<Book> GetDownloadedBooks(int userId)
+        public List<Book> GetDownloadedBooks(string userId)
         {
             List<Book> downloadedBooks = new List<Book>();
             var db = new DataLayer.DatabaseEntities();
-            var user = db.users.Where(us => us.id == userId).FirstOrDefault();
+
+            var id = int.Parse(userId);
+            var user = db.users.Where(us => us.id == id).FirstOrDefault();
             if (user == null)
             {
                 throw new Exception("User with selected ID does not exist!");
@@ -200,11 +212,12 @@ namespace DigitalLibraryService
         }
 
 
-        public List<Book> GetBooksForAuthor(int authorId)
+        public List<Book> GetBooksForAuthor(string authorId)
         {
             List<Book> books = new List<Book>();
             var db = new DataLayer.DatabaseEntities();
-            var author = db.authors.Where(aut => aut.id == authorId).FirstOrDefault();
+            var id = int.Parse(authorId);
+            var author = db.authors.Where(aut => aut.id == id).FirstOrDefault();
             if (author == null)
             {
                 throw new Exception("Author with selected ID does not exist!");
@@ -214,7 +227,7 @@ namespace DigitalLibraryService
         }
 
 
-        public void Logout(int userId)
+        public void Logout(string userId)
         {
             throw new NotImplementedException();
         }
@@ -232,7 +245,7 @@ namespace DigitalLibraryService
             return usertypes;
         }
 
-        public void DeleteUser(int userId)
+        public void DeleteUser(string userId)
         {
             throw new NotImplementedException();
         }
@@ -262,17 +275,17 @@ namespace DigitalLibraryService
             throw new NotImplementedException();
         }
 
-        public void DeleteGenre(int genreId)
+        public void DeleteGenre(string genreId)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteAuthor(int authorId)
+        public void DeleteAuthor(string authorId)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteBook(int bookId)
+        public void DeleteBook(string bookId)
         {
             throw new NotImplementedException();
         }

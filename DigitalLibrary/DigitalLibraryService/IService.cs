@@ -9,7 +9,7 @@ using System.Web;
 
 namespace DigitalLibraryService
 {
-    [ServiceContract]  
+    [ServiceContract]
     public interface IService
     {
         [OperationContract]
@@ -22,50 +22,50 @@ namespace DigitalLibraryService
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "books/id/{id}")]
-        Book GetBookWithId(int bookId);
+        Book GetBookWithId(string id);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "genres/id/{id}")]
-        Genre GetGenreWithId(int genreId);
+        Genre GetGenreWithId(string id);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "books/genres/{genreId}")]
-        List<Book> GetBooksForGenre(int genreId);
+        List<Book> GetBooksForGenre(string genreId);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "authors/id/{authorId}")]
-        Author GetAuthorWithId(int authorId);
+        Author GetAuthorWithId(string authorId);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/get/{userId}")]
-        User GetUser(int userId);
+        User GetUser(string userId);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "books/downloaded/{userId}")]
-        List<Book> GetDownloadedBooks(int userId);
+        List<Book> GetDownloadedBooks(string userId);
         
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "books/authors/{authorId}")]
-        List<Book> GetBooksForAuthor(int authorId);
+        List<Book> GetBooksForAuthor(string authorId);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "logout/{userId}")]
-        void Logout(int userId);
+        void Logout(string userId);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/types")]
         List<UserType> GetUserTypes();
 
         [OperationContract]
-        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/{userId}")] 
-        void DeleteUser(int userId);
+        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/{userId}")]
+        void DeleteUser(string userId);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/All")]
         List<User> GetAllUsers();
 
         [OperationContract]
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/edit/{userId}")] 
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/edit")] 
         void UpdateUser(User u);
 
         [OperationContract]
@@ -81,16 +81,16 @@ namespace DigitalLibraryService
         void AddAuthor(Author a);
 
         [OperationContract]
-        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "genres/{genreId}")] 
-        void DeleteGenre(int genreId);
+        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "genres/{genreId}")]
+        void DeleteGenre(string genreId);
 
         [OperationContract]
-        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "authors/{authorId}")] 
-        void DeleteAuthor(int authorId);
+        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "authors/{authorId}")]
+        void DeleteAuthor(string authorId);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "books/{bookId}")]
-        void DeleteBook(int bookId);
+        void DeleteBook(string bookId);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "books/All")]

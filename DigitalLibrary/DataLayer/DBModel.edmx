@@ -66,7 +66,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="first_name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="last_name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="biography" Type="ntext" />
@@ -99,7 +99,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="title" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="isbn" Type="varchar" MaxLength="13" />
           <Property Name="edition" Type="varchar" MaxLength="10" />
@@ -123,7 +123,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="active" Type="bit" />
         </EntityType>
@@ -131,7 +131,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="active" Type="bit" />
         </EntityType>
@@ -139,7 +139,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="password" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="salt" Type="varbinary" MaxLength="10" />

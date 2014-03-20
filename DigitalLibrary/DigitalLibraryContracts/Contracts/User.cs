@@ -32,5 +32,8 @@ namespace DigitalLibraryContracts
 
         [DataMember]
         public UserType Type { get; set; }
+
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }
