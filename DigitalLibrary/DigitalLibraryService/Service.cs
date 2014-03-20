@@ -212,5 +212,104 @@ namespace DigitalLibraryService
             books = author.books.Select(book => book.ToContract()).ToList();
             return books;
         }
+
+
+        public void Logout(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<UserType> GetUserTypes()
+        {
+            List<UserType> usertypes = new List<UserType>();
+            var db = new DataLayer.DatabaseEntities();
+            var utypes = db.user_types;
+            if (utypes == null)
+            {
+                throw new Exception("There are no user types present!");
+            }
+            usertypes = utypes.Select(utype => utype.ToContract()).ToList();
+            return usertypes;
+        }
+
+        public void DeleteUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateUser(User u)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddBook(Book k)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddGenre(Genre g)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddAuthor(Author a)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteGenre(int genreId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAuthor(int authorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBook(int bookId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Book> GetAllBooks()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Genre> GetAllGenres()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Author> GetAllAuthors()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateGenre(Genre g)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateAuthor(Author a)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateBook(Book b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Book> SearchBooks(string searchString)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
