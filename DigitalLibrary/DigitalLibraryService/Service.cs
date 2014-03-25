@@ -55,11 +55,11 @@ namespace DigitalLibraryService
                 email = newUser.Email,
                 last_name = newUser.LastName,
                 active = true
-
+                
             });
             db.SaveChanges();
         }
-
+        
         public User AddedBy(int id)
         {
             var db = new DataLayer.DatabaseEntities();
@@ -67,7 +67,7 @@ namespace DigitalLibraryService
             int user_id = db_book.added_by;
             var db_user = db.users.Where(u => u.id == user_id).FirstOrDefault();
             var user = new User()
-            {
+            {                
                 FirstName = db_user.first_name,
                 LastName = db_user.last_name,
                 Type = new UserType()
@@ -76,7 +76,7 @@ namespace DigitalLibraryService
                 },
                 Username = db_user.username,
                 IsActive = true
-
+               
             };
 
             return user;
@@ -241,7 +241,7 @@ namespace DigitalLibraryService
             {
                 throw new Exception("There are no user types present!");
             }
-            usertypes = utypes.Select(utype => utype.ToContract()).ToList();
+            usertypes = utypes.ToList().Select(utype => Converters.ToContract(utype)).ToList();
             return usertypes;
         }
 
