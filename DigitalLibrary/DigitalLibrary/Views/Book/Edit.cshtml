@@ -1,0 +1,78 @@
+﻿@model DataLayer.book
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>book</legend>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title)
+            @Html.ValidationMessageFor(model => model.title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.isbn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isbn)
+            @Html.ValidationMessageFor(model => model.isbn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.edition)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.edition)
+            @Html.ValidationMessageFor(model => model.edition)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.added_by, "user")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("added_by", String.Empty)
+            @Html.ValidationMessageFor(model => model.added_by)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.active)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.active)
+            @Html.ValidationMessageFor(model => model.active)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
