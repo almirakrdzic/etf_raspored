@@ -245,15 +245,50 @@ namespace DigitalLibraryService
             return usertypes;
         }
 
+        public List<Book> GetAllBooks()
+        {
+            List<Book> books = new List<Book>();
+            var db = new DataLayer.DatabaseEntities();
+            var _books = db.books;
+            if (_books == null)
+            {
+                throw new Exception("There are no books present!");
+            }
+            books = _books.ToList().Select(boo => boo.ToContract()).ToList();
+            return books;
+        }
+
+        public List<User> GetAllUsers()
+        {
+            List<User> users = new List<User>();
+            var db = new DataLayer.DatabaseEntities();
+            var _users = db.users;
+            if (_users == null)
+            {
+                throw new Exception("There are no genres present!");
+            }
+            users = _users.ToList().Select(user => user.ToContract()).ToList();
+            return users;
+        }
+
+        public List<Genre> GetAllGenres()
+        {
+            List<Genre> genres = new List<Genre>();
+            var db = new DataLayer.DatabaseEntities();
+            var _genres = db.genres;
+            if (_genres == null)
+            {
+                throw new Exception("There are no genres present!");
+            }
+            genres = _genres.ToList().Select(genr => genr.ToContract()).ToList();
+            return genres;
+        }
+
         public void DeleteUser(string userId)
         {
             throw new NotImplementedException();
         }
 
-        public List<User> GetAllUsers()
-        {
-            throw new NotImplementedException();
-        }
 
         public void UpdateUser(User u)
         {
@@ -290,16 +325,6 @@ namespace DigitalLibraryService
             throw new NotImplementedException();
         }
 
-        public List<Book> GetAllBooks()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Genre> GetAllGenres()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Author> GetAllAuthors()
         {
             throw new NotImplementedException();
@@ -326,6 +351,67 @@ namespace DigitalLibraryService
         }
 
 
+
+
+        public Book GetBookWithId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Genre GetGenreWithId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Book> GetBooksForGenre(int genreId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Author GetAuthorWithId(int authorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Book> GetDownloadedBooks(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Book> GetBooksForAuthor(int authorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Logout(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteGenre(int genreId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAuthor(int authorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBook(int bookId)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
