@@ -178,7 +178,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\AuthorController.cs" />
     <Compile Include="API\BookController.cs" />
+    <Compile Include="API\GenreController.cs" />
+    <Compile Include="API\UserController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
