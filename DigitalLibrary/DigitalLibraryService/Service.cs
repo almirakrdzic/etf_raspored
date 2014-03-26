@@ -327,7 +327,15 @@ namespace DigitalLibraryService
 
         public List<Author> GetAllAuthors()
         {
-            throw new NotImplementedException();
+            List<Author> lAuthors = new List<Author>();
+            var db = new DataLayer.DatabaseEntities();
+            var allAuthors = db.authors;
+            if (allAuthors == null)
+            {
+                throw new Exception("There are no authors to present!");
+            }
+            lAuthors = allAuthors.ToList().Select(author => author.ToContract()).ToList();
+            return lAuthors;
         }
 
         public void UpdateGenre(Genre g)
