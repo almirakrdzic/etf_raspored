@@ -61,5 +61,16 @@ namespace DigitalLibraryContracts
 
             return utype;
         }
+
+        public static Genre ToContract(this DataLayer.genre genre)
+        {
+            Genre ugenre = new Genre()
+            {
+                Id = genre.id,
+                Name = genre.name
+            };
+
+            return ugenre;
+        }
     }
 }
