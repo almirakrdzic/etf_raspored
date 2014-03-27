@@ -14,7 +14,7 @@ using DigitalLibrary.Models;
 namespace DigitalLibrary.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
+   // [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
