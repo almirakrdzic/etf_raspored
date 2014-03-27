@@ -55,7 +55,7 @@ namespace DigitalLibrary.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class LoginModel
+    public class UserLoginModel
     {
         [Required]
         [Display(Name = "User name")]

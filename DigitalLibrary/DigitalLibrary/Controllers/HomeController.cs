@@ -1,4 +1,5 @@
-﻿using DigitalLibraryContracts;
+﻿using DigitalLibrary.Models;
+using DigitalLibraryContracts;
 using DigitalLibraryService;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,26 @@ namespace DigitalLibrary.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(UserLoginModel login)
+        {
+            Service s = new Service();
+            try
+            {
+                var user = s.Login(login.UserName, login.Password);
+                Session["UserName"] = user.Username;
+                Session["Password"] = user.Password;
+            }
+            catch
+            {
+                RedirectToAction("Login");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

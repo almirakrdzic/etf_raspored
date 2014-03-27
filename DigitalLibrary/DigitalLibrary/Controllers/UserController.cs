@@ -15,7 +15,7 @@ namespace DigitalLibrary.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Create");
         }
 
         public ActionResult Create()
@@ -33,7 +33,7 @@ namespace DigitalLibrary.Controllers
             };
             s.AddNewUser(user);
 
-            return View();
+            return RedirectToAction("Login","Home");
         }
 
     }
