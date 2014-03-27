@@ -6,7 +6,8 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 namespace DataLayer
 {
     using System;
@@ -20,14 +21,37 @@ namespace DataLayer
             this.genres = new HashSet<genre>();
             this.users = new HashSet<user>();
         }
-    
+
+        [ScaffoldColumn(false)]
         public int id { get; set; }
+
+        [DisplayName("Title")]
+        [Required(ErrorMessage = "Title is required"), StringLength(50)] 
         public string title { get; set; }
+
+        [DisplayName("ISBN")]
+        [Required(ErrorMessage = "ISBN is required"), StringLength(13)] 
         public string isbn { get; set; }
+
+        [DisplayName("Edition")]
+        [Required(ErrorMessage = "Edition is required"), StringLength(10)] 
         public string edition { get; set; }
+
+        [DisplayName("Description")]
+        [Required(ErrorMessage = "Description is required")] 
         public string description { get; set; }
+
+        [DisplayName("Data")]
+        [Required(ErrorMessage = "Data is required")] 
         public byte[] data { get; set; }
+
+
+        [DisplayName("User")]
+        [Required]
         public int added_by { get; set; }
+
+        [DisplayName("Active")]
+        [Required]
         public Nullable<bool> active { get; set; }
     
         public virtual user user { get; set; }

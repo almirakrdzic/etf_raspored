@@ -6,7 +6,8 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 namespace DataLayer
 {
     using System;
@@ -18,12 +19,25 @@ namespace DataLayer
         {
             this.books = new HashSet<book>();
         }
-    
+
+        [ScaffoldColumn(false)]
         public int id { get; set; }
+
+        [DisplayName("First Name")]
+        [Required(ErrorMessage = "First Name is required"), StringLength(50)] 
         public string first_name { get; set; }
+
+        [DisplayName("Last Name")]
+        [Required(ErrorMessage = "Last Name is required"), StringLength(50)] 
         public string last_name { get; set; }
+
+
         public string biography { get; set; }
+
+        [DisplayName("Birth date")]
+        [Required(ErrorMessage = "Birth date is required"), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> birth_date { get; set; }
+
         public Nullable<bool> active { get; set; }
     
         public virtual ICollection<book> books { get; set; }
