@@ -72,7 +72,7 @@ namespace DigitalLibrary.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(UserLoginPageModel model)
         {
             if (ModelState.IsValid)
             {

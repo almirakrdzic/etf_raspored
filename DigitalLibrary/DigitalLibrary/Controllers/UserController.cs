@@ -24,16 +24,25 @@ namespace DigitalLibrary.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
         {
-            Service s = new Service();
-            user.Type = new UserType()
+            if (ModelState.IsValid)
             {
-                Id = 1
-            };
-            s.AddNewUser(user);
+                Service s = new Service();
+                user.Type = new UserType()
+                {
+                    Id = 1
+                };
+                s.AddNewUser(user);
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View();
+            }        
 
-            return RedirectToAction("Login","Home");
+            
         }
 
     }
