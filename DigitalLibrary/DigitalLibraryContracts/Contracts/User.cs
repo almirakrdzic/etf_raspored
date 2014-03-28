@@ -15,26 +15,26 @@ namespace DigitalLibraryContracts
         public int Id { get; set; }
 
         [DataMember]
-        [Required(ErrorMessage = "Username is required"), StringLength(50)] 
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName ="UsernameRequired")]
         public string Username { get; set; }
 
         [DataMember]
-        [Required(ErrorMessage = "Password is required"), StringLength(50)] 
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "PasswordRequired")] 
         public string Password { get; set; }
         
         [DataMember]
         public byte[] Salt { get; set; }
 
         [DataMember]
-        [Required(ErrorMessage = "First name is required"), StringLength(50)] 
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "FirstNameRequired")]
         public string FirstName { get; set; }
         
         [DataMember]
-        [Required(ErrorMessage = "Last name is required"), StringLength(50)] 
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "LastNameRequired")]
         public string LastName { get; set; }
 
         [DataMember]
-        [Required(ErrorMessage = "Email is required"), StringLength(50)] 
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "EmailRequired")]
         public string Email { get; set;  }
 
         [DataMember]
