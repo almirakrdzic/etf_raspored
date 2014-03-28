@@ -77,6 +77,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\AuthorizationPolicy.cs" />
+    <Content Include="App_Code\Security\CustomPrincipal.cs" />
     <Compile Include="Auth\CustomValidator.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
