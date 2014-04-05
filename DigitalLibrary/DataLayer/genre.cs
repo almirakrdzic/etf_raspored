@@ -24,11 +24,11 @@ namespace DataLayer
         public int id { get; set; }
 
         [DisplayName("Name")]
-        [Required(ErrorMessage = "Name is required"), StringLength(50)] 
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "GenreNameRequired"), StringLength(50)] 
         public string name { get; set; }
 
-        [DisplayName("active")]
-        [Required]
+        [DisplayName("Active")]
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "ActiveRequired")]
         public Nullable<bool> active { get; set; }
     
         public virtual ICollection<book> books { get; set; }

@@ -26,32 +26,28 @@ namespace DataLayer
         public int id { get; set; }
 
         [DisplayName("Title")]
-        [Required(ErrorMessage = "Title is required"), StringLength(50)] 
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "TitleRequired"), StringLength(50)] 
         public string title { get; set; }
 
         [DisplayName("ISBN")]
-        [Required(ErrorMessage = "ISBN is required"), StringLength(13)] 
         public string isbn { get; set; }
 
         [DisplayName("Edition")]
-        [Required(ErrorMessage = "Edition is required"), StringLength(10)] 
         public string edition { get; set; }
 
         [DisplayName("Description")]
-        [Required(ErrorMessage = "Description is required")] 
         public string description { get; set; }
 
         [DisplayName("Data")]
-        [Required(ErrorMessage = "Data is required")] 
         public byte[] data { get; set; }
 
 
         [DisplayName("User")]
-        [Required]
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "UserRequired")] 
         public int added_by { get; set; }
 
         [DisplayName("Active")]
-        [Required]
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "ActiveRequired")] 
         public Nullable<bool> active { get; set; }
     
         public virtual user user { get; set; }
