@@ -4,29 +4,27 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-        <!--<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />-->
+        <!--<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />-->       
         
         @Styles.Render("~/Content/bootstrapcss")
-
+        @Styles.Render("~/Content/css")
  @Scripts.Render("~/bundles/modernizr")
         
     </head>
     <body>
-       <div class="container-fluid">
+      
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="pull-right">       
+             <ul class="nav navbar-nav navbar-left">
+                  @Html.Partial("_LoginPartial")
+             </ul>        
+    </div>
+</nav>
+       
+        
+ <div class="container-fluid">
  <div class="row-fluid">
- <div class="span3">
- <div class="well sidebar-nav">
- <ul class="nav nav-list">
- <li class="nav-header">Categories</li>
- <li>@Html.ActionLink("Users","../user")</li>
- <li>@Html.ActionLink("Genres","../genre")</li>
- <li>@Html.ActionLink("Authors","../author")</li>
- <li>@Html.ActionLink("Books","../book")</li>
-
- </ul>
- </div>
- </div>
- <div class="span9">
+  <div class="span12">
  @RenderSection("featured", required: false)
  <div class="row-fluid">
  @RenderBody()
@@ -38,7 +36,6 @@
  @Scripts.Render("~/bundles/bootstrapjs")
 
 @RenderSection("scripts", required: false)
-        @Html.ActionLink("Home >>","../", null,new { @class="btn btn-primary btn-large" })
-        @Html.ActionLink("Login","../account/Login", null,new { @class="btn btn-primary btn-large" })        
-         </body>
+        
+</body>
 </html>

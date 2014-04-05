@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DigitalLibrary.Controllers
 {
@@ -19,13 +20,25 @@ namespace DigitalLibrary.Controllers
             return View();
         }
 
+        [Authorize(Roles = "administrator")]
+        public ActionResult AdminHome()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "user")]
+        public ActionResult UserHome()
+        {
+            return View();
+        }
+
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(UserLoginModel login)
+        public ActionResult Login(UserLoginPageModel login)
         {
             Service s = new Service();
             try
@@ -33,12 +46,30 @@ namespace DigitalLibrary.Controllers
                 var user = s.Login(login.UserName, login.Password);
                 Session["UserName"] = user.Username;
                 Session["Password"] = user.Password;
+                FormsAuthentication.SetAuthCookie(login.UserName, login.RememberMe);
             }
             catch
             {
-                RedirectToAction("Login");
+                return RedirectToAction("Login");
             }
-            return RedirectToAction("Index");
+            
+            if(Roles.IsUserInRole(login.UserName,"administrator"))
+            {
+                return RedirectToAction("AdminHome","Home");
+            }
+            if(Roles.IsUserInRole(login.UserName,"user"))
+            {
+                return RedirectToAction("UserHome","Home");
+            }
+            return RedirectToAction("Login");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

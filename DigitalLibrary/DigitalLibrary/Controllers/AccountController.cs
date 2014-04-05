@@ -23,6 +23,10 @@ namespace DigitalLibrary.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (!WebSecurity.Initialized)
+            {
+                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "users", "id", "username", autoCreateTables: true);
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

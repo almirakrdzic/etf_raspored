@@ -9,6 +9,7 @@ using DataLayer;
 
 namespace DigitalLibrary.Controllers
 {
+    [Authorize(Roles = "administrator")]
     public class BookController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();
