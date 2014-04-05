@@ -23,6 +23,7 @@ namespace DigitalLibrary.Controllers
         [Authorize(Roles = "administrator")]
         public ActionResult AdminHome()
         {
+            ViewBag.Message = "Your app description page.";
             return View();
         }
 
@@ -34,6 +35,7 @@ namespace DigitalLibrary.Controllers
 
         public ActionResult Login()
         {
+
             return View();
         }
 
