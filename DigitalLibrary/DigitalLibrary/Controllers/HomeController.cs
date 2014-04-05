@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Recaptcha.Web;
+using Recaptcha.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace DigitalLibrary.Controllers
 {
@@ -23,7 +26,6 @@ namespace DigitalLibrary.Controllers
         [Authorize(Roles = "administrator")]
         public ActionResult AdminHome()
         {
-            ViewBag.Message = "Your app description page.";
             return View();
         }
 
@@ -35,34 +37,51 @@ namespace DigitalLibrary.Controllers
 
         public ActionResult Login()
         {
-
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(UserLoginPageModel login)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login (UserLoginPageModel login)       
         {
-            Service s = new Service();
-            try
+            RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
+            if (String.IsNullOrEmpty(recaptchaHelper.Response))
             {
-                var user = s.Login(login.UserName, login.Password);
-                Session["UserName"] = user.Username;
-                Session["Password"] = user.Password;
-                FormsAuthentication.SetAuthCookie(login.UserName, login.RememberMe);
-            }
-            catch
+                 ModelState.AddModelError("", "Captcha answer cannot be empty.");
+                 return View();
+             }
+           RecaptchaVerificationResult recaptchaResult = await recaptchaHelper.VerifyRecaptchaResponseTaskAsync();
+            if (recaptchaResult != RecaptchaVerificationResult.Success)
+             {
+                 ModelState.AddModelError("", "Incorrect captcha answer.");
+                return View();
+             }
+
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Login");
-            }
-            
-            if(Roles.IsUserInRole(login.UserName,"administrator"))
-            {
-                return RedirectToAction("AdminHome","Home");
-            }
-            if(Roles.IsUserInRole(login.UserName,"user"))
-            {
-                return RedirectToAction("UserHome","Home");
-            }
+                Service s = new Service();
+                try
+                {
+                    var user = s.Login(login.UserName, login.Password);
+                    Session["UserName"] = user.Username;
+                    Session["Password"] = user.Password;
+                    FormsAuthentication.SetAuthCookie(login.UserName, login.RememberMe);
+                }
+                catch
+                {
+                    return RedirectToAction("Login");
+                }
+
+
+                if (Roles.IsUserInRole(login.UserName, "administrator"))
+                {
+                    return RedirectToAction("AdminHome", "Home");
+                }
+                if (Roles.IsUserInRole(login.UserName, "user"))
+                {
+                    return RedirectToAction("UserHome", "Home");                
+               }
+        }
             return RedirectToAction("Login");
         }
 

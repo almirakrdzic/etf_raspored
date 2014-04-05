@@ -1,4 +1,6 @@
 ﻿@model DigitalLibrary.Models.UserLoginPageModel
+@using Recaptcha.Web.Mvc;
+
 
 @{
     ViewBag.Title = "Login";
@@ -31,8 +33,10 @@
              <li>
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>      
+            </li>  
+                             
         </ol>
+       @Html.Recaptcha(theme:Recaptcha.Web.RecaptchaTheme.White);
         <input type="submit" value="Log in" />
     </fieldset>
     <p>
