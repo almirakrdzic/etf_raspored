@@ -7,8 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Recaptcha.Web;
-using Recaptcha.Web.Mvc;
+using Recaptcha;
 using System.Threading.Tasks;
 
 namespace DigitalLibrary.Controllers
@@ -42,16 +41,11 @@ namespace DigitalLibrary.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login (UserLoginPageModel login)       
+        [RecaptchaControlMvc.CaptchaValidatorAttribute]
+        public async Task<ActionResult> Login(UserLoginPageModel login, bool captchaValid)       
         {
-            RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
-            if (String.IsNullOrEmpty(recaptchaHelper.Response))
-            {
-                 ModelState.AddModelError("", "Captcha answer cannot be empty.");
-                 return View();
-             }
-           RecaptchaVerificationResult recaptchaResult = await recaptchaHelper.VerifyRecaptchaResponseTaskAsync();
-            if (recaptchaResult != RecaptchaVerificationResult.Success)
+            
+            if (!captchaValid)
              {
                  ModelState.AddModelError("", "Incorrect captcha answer.");
                 return View();

@@ -1,5 +1,5 @@
 ﻿@model DigitalLibrary.Models.UserLoginPageModel
-@using Recaptcha.Web.Mvc;
+@using Recaptcha;
 
 
 @{
@@ -36,7 +36,7 @@
             </li>  
                              
         </ol>
-       @Html.Recaptcha(theme:Recaptcha.Web.RecaptchaTheme.White);
+       @Html.Raw(Html.GenerateCaptcha())
         <input type="submit" value="Log in" />
     </fieldset>
     <p>
