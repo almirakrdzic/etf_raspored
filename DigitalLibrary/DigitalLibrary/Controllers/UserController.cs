@@ -39,6 +39,26 @@ namespace DigitalLibrary.Controllers
                     Id = 1
                 };
                 s.AddNewUser(user);
+                if (ModelState.IsValid)
+                {
+                    // Attempt to register the user
+                    try
+                    {
+                       dynamic email = new Email("Email");
+                        email.To = user.Email;
+                        email.UserName = user.Username;
+                        email.ConfirmationToken = Guid.NewGuid().ToString("N");
+                        Session["ConfirmationToken"] = email.ConfirmationToken;
+                        email.Send();
+
+                        return RedirectToAction("WaitingForConfirmation", "User");
+                    }
+                    catch (MembershipCreateUserException e)
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    }
+                }
+
                 return RedirectToAction("Login", "Home");
             }
             else
@@ -49,35 +69,7 @@ namespace DigitalLibrary.Controllers
             
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                try
-                {
-                    string confirmationToken =
-                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { Email = model.Email }, true);
-                    dynamic email = new Email("RegEmail");
-                    email.To = model.Email;
-                    email.UserName = model.UserName;
-                    email.ConfirmationToken = confirmationToken;
-                    email.Send();
-
-                    return RedirectToAction("RegisterStepTwo", "Account");
-                }
-                catch (MembershipCreateUserException e)
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+      
 
         private string ErrorCodeToString(MembershipCreateStatus membershipCreateStatus)
         {
@@ -91,9 +83,10 @@ namespace DigitalLibrary.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult RegisterConfirmation(string Id)
+        public ActionResult RegisterConfirmation(Guid Id)
         {
-            if (WebSecurity.ConfirmAccount(Id))
+            var confirmationToken = Session["ConfirmationToken"].ToString();
+            if (new Guid(confirmationToken) == Id)
             {
                 return RedirectToAction("ConfirmationSuccess");
             }
@@ -111,6 +104,14 @@ namespace DigitalLibrary.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public ActionResult WaitingForConfirmation()
+        {
+            return View();
+        }
+
+      
 
     }
 }

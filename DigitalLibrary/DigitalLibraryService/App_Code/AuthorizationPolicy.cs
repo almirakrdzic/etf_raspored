@@ -30,6 +30,17 @@ namespace DigitalLibraryService.App_Code
             if (identities == null || identities.Count <= 0)
                 throw new Exception("No Identity found");
             return identities[0];
-        } 
+        }
+
+
+        public ClaimSet Issuer
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string Id
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }
