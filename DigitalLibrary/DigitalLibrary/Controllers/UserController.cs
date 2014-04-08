@@ -1,4 +1,5 @@
-﻿using DigitalLibrary.Models;
+﻿using DataLayer;
+using DigitalLibrary.Models;
 using DigitalLibraryContracts;
 using DigitalLibraryService;
 using Postal;
@@ -33,12 +34,9 @@ namespace DigitalLibrary.Controllers
         {
             if (ModelState.IsValid)
             {
-                Service s = new Service();
-                user.Type = new UserType()
-                {
-                    Id = 1
-                };
-                s.AddNewUser(user);
+              
+
+               
                 if (ModelState.IsValid)
                 {
                     // Attempt to register the user
@@ -50,6 +48,20 @@ namespace DigitalLibrary.Controllers
                         email.ConfirmationToken = Guid.NewGuid().ToString("N");
                         Session["ConfirmationToken"] = email.ConfirmationToken;
                         email.Send();
+
+                        user.Type = new UserType()
+                        {
+                            Id = 1
+                        };
+                        user.ConfirmationToken = email.ConfirmationToken;
+                        user.IsActive = false;
+                        user.IsConfirmed = false;
+                        using (var db = new DatabaseEntities())
+                        {
+                            
+                            db.users.Add(user.ToModel());
+                            db.SaveChanges();
+                        }
 
                         return RedirectToAction("WaitingForConfirmation", "User");
                     }
@@ -96,6 +108,17 @@ namespace DigitalLibrary.Controllers
         [AllowAnonymous]
         public ActionResult ConfirmationSuccess()
         {
+            using (var db = new DatabaseEntities())
+            {
+                var confirmationToken = Session["ConfirmationToken"].ToString();
+                var user = db.users.Where(u => u.confirmationToken == confirmationToken).FirstOrDefault();
+                if (user != null)
+                {
+                    user.isConfirmed = true;
+                    user.active = true;
+                    db.SaveChanges();
+                }
+            }
             return View();
         }
 

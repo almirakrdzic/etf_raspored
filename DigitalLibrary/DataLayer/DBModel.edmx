@@ -104,7 +104,7 @@
           <Property Name="isbn" Type="varchar" MaxLength="13" />
           <Property Name="edition" Type="varchar" MaxLength="10" />
           <Property Name="description" Type="varchar(max)" />
-          <Property Name="data" Type="varbinary(max)" Nullable="false" />
+          <Property Name="data" Type="varbinary(max)" />
           <Property Name="added_by" Type="int" Nullable="false" />
           <Property Name="active" Type="bit" />
         </EntityType>
@@ -148,6 +148,9 @@
           <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="type" Type="int" Nullable="false" />
           <Property Name="active" Type="bit" />
+          <Property Name="image" Type="varbinary(max)" />
+          <Property Name="isConfirmed" Type="bit" />
+          <Property Name="confirmationToken" Type="nchar" MaxLength="64" />
         </EntityType>
         <Association Name="FK_author_id">
           <End Role="authors" Type="digital_libraryModel.Store.authors" Multiplicity="1" />
@@ -297,7 +300,7 @@
           <Property Name="isbn" Type="String" MaxLength="13" Unicode="false" FixedLength="false" />
           <Property Name="edition" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="data" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="added_by" Type="Int32" Nullable="false" />
           <NavigationProperty Name="user" Relationship="digital_libraryModel.FK_books_added" FromRole="books" ToRole="users" />
           <NavigationProperty Name="authors" Relationship="digital_libraryModel.book_author" FromRole="books" ToRole="authors" />
@@ -339,6 +342,9 @@
           <NavigationProperty Name="user_types" Relationship="digital_libraryModel.FK_user_type" FromRole="users" ToRole="user_types" />
           <NavigationProperty Name="books1" Relationship="digital_libraryModel.downloaded_books" FromRole="users" ToRole="books" />
           <Property Type="Boolean" Name="active" />
+          <Property Type="Binary" Name="image" MaxLength="Max" FixedLength="false" />
+          <Property Type="Boolean" Name="isConfirmed" />
+          <Property Type="String" Name="confirmationToken" MaxLength="64" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_books_added">
           <End Role="users" Type="digital_libraryModel.user" Multiplicity="1" />
@@ -429,6 +435,9 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="digital_libraryModel.user">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="confirmationToken" ColumnName="confirmationToken" />
+                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
+                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />

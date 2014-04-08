@@ -72,5 +72,24 @@ namespace DigitalLibraryContracts
 
             return ugenre;
         }
+
+
+        public static DataLayer.user ToModel(this User user)
+        {
+            DataLayer.user newUser = new DataLayer.user()
+            {
+                id = user.Id,
+                username = user.Username,
+                first_name = user.FirstName,
+                last_name = user.LastName,
+                email = user.Email,
+                password=user.Password,
+                confirmationToken=user.ConfirmationToken,
+                isConfirmed=user.IsConfirmed,
+                active=user.IsActive,
+                type=user.Type.Id
+            };
+            return newUser;
+        }
     }
 }

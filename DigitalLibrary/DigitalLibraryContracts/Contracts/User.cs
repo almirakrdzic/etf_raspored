@@ -42,5 +42,11 @@ namespace DigitalLibraryContracts
 
         [DataMember]
         public bool IsActive { get; set; }
+
+        [DataMember]
+        public bool IsConfirmed { get; set; }
+
+        [DataMember]
+        public string ConfirmationToken { get; set; }
     }
 }
