@@ -123,6 +123,9 @@
   <data name="FirstNameRequired" xml:space="preserve">
     <value>First name is required</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Choose a language</value>
+  </data>
   <data name="LastNameRequired" xml:space="preserve">
     <value>Last name is required</value>
   </data>

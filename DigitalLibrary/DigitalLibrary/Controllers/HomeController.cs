@@ -9,10 +9,11 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Recaptcha;
 using System.Threading.Tasks;
+using DigitalLibraryContracts.Helpers;
 
 namespace DigitalLibrary.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         //
         // GET: /Home/
@@ -92,5 +93,7 @@ namespace DigitalLibrary.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
+       
     }
 }

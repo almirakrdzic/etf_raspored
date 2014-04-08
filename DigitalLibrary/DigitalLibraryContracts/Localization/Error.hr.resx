@@ -123,6 +123,9 @@
   <data name="FirstNameRequired" xml:space="preserve">
     <value>Potrebno je unijeti ime</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Odabir jezika</value>
+  </data>
   <data name="LastNameRequired" xml:space="preserve">
     <value>Potrebno je unijeti prezime</value>
   </data>
