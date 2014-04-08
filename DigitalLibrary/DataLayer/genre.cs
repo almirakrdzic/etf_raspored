@@ -6,8 +6,7 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+
 namespace DataLayer
 {
     using System;
@@ -19,16 +18,9 @@ namespace DataLayer
         {
             this.books = new HashSet<book>();
         }
-
-        [ScaffoldColumn(false)]
+    
         public int id { get; set; }
-
-        [DisplayName("Name")]
-        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "GenreNameRequired"), StringLength(50)] 
         public string name { get; set; }
-
-        [DisplayName("Active")]
-        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "ActiveRequired")]
         public Nullable<bool> active { get; set; }
     
         public virtual ICollection<book> books { get; set; }

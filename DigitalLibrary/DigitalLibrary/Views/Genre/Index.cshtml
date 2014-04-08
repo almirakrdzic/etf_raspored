@@ -4,36 +4,38 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.active)
-        </th>
-        <th></th>
+<br />
+<br />
+<div class="row">
+<div class="block-content collapse in">
+<div class="span6 offset1">
+<table id="genretable" class="table table-striped">
+<thead>
+<tr><th>Name</th></tr>
+</thead>
+<tbody>
+@foreach (var item in Model)
+{
+    <tr><td>@Html.TextBoxFor(modelItem => item.name)
+        <a id="@item.id" href="javascript:deleteGenre(@item.id)"><img src="~/Content/img/delete.png" /></a>
+     </td>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.active)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
+}                                       
+</tbody>
 </table>
+</div>
+<div id="newGenre" class="span3"></div>
+</div>
+</div>
+ 
+<div class="row">
+ <div class="span10">             
+ <div class="span3 offset1">              
+ <a class="btn btn-large btn-block" href="javascript:addGenre()">Add</a>
+ </div>         
+ </div>
+ </div>
+
+
+

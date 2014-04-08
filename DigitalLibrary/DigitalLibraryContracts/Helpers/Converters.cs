@@ -45,7 +45,9 @@ namespace DigitalLibraryContracts
                 Username = user.username,
                 FirstName = user.first_name,
                 LastName = user.last_name,
-                Email = user.email
+                Email = user.email,
+                Image = user.image,
+                Password = user.password
 
             };
             return newUser;

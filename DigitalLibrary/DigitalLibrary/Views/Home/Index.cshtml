@@ -4,3 +4,33 @@
 @section featured {
  
 }
+
+<div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span9" id="sidebar">  
+                    <img src="~/Content/img/library.png"/>   
+                </div>                
+                <!--/span-->
+                <div class="span3" id="content">          
+                  
+                    <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left"></div>
+                                <div class="pull-right"><span class="badge badge-info"> :) </span>
+                                </div>
+                            </div>
+                            <div id="indexshow" class="block-content collapse in">                               
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+
+    @section Scripts{
+    @Scripts.Render("~/bundles/piechartjs") 
+    @Scripts.Render("~/bundles/ajaxjs") 
+    @Scripts.Render("~/bundles/indexjs") 
+}

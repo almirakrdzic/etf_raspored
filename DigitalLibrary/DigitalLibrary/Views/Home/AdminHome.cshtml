@@ -4,17 +4,56 @@
 
 
 <div class="container-fluid">
- <div class="row-fluid">
-  <div class="span3">
-<div class="well sidebar-nav">
- <ul class="nav nav-list">
- <li class="nav-header">Categories</li>
- <li>@Html.ActionLink("Users","../user")</li>
- <li>@Html.ActionLink("Genres","../genre")</li>
- <li>@Html.ActionLink("Authors","../author")</li>
- <li>@Html.ActionLink("Books","../book")</li>
- </ul>
- </div>
- </div>
- </div>
- </div>
+            <div class="row-fluid">
+                <div class="span3" id="sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                        <li class="active">
+                            <a id="dashboard" href="#"><i class="icon-chevron-right"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a id="users" href="#"><i class="icon-chevron-right"></i> Users</a>
+                        </li>
+                        <li>
+                            <a id="books" href="#"><i class="icon-chevron-right"></i> Books</a>
+                        </li>
+                        <li>
+                            <a id="genres" href="#"><i class="icon-chevron-right"></i> Genres</a>
+                        </li>
+                        <li>
+                            <a id="authors" href="#"><i class="icon-chevron-right"></i> Authors</a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                
+                <!--/span-->
+                <div class="span9" id="content">            
+ 
+                    <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">Gallery</div>
+                                <div class="pull-right"><span class="badge badge-info">1,462</span>
+                                </div>
+                            </div>
+                            <div id="show" class="block-content collapse in">                               
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+
+    <div ng-controller="AlertDemoCtrl">
+  <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+  <button class='btn btn-default' ng-click="addAlert()">Add Alert</button>
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/piechartjs") 
+    @Scripts.Render("~/bundles/ajaxjs") 
+    @Scripts.Render("~/bundles/adminjs") 
+     @Scripts.Render("~/bundles/angularjs") 
+}

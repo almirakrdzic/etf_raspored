@@ -3,55 +3,48 @@
 @{
     ViewBag.Title = "Details";
 }
+          
+            <div class="row">
+           <div class="span3 offset1">
+          <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="~/Content/img/book.png" /> 
+             
+                </div>
+            <div class="span6">
+                <p><h3>@Model.title</h3></p>                          
+              <article> @Model.description</article>
+            </div>
+          </div>            
+          
+          <hr />      
+           <div class="row">
+           <div class="span3 offset1">            
+            <p style="text-align:left"><b>Added by: </b></p>    
+            <p style="text-align:left"><b>Edition: </b></p>
+            <p style="text-align:left"><b>ISBN: </b></p> 
+            <p style="text-align:left"><b>Authors: </b></p>                       
+            </div>
+            <div class="span3">            
+            <p style="text-align:left"><a style="font-family:sans-serif;color:GrayText"> @Model.user.first_name @Model.user.last_name</a></p>    
+            <p style="text-align:left;font-family:sans-serif;color:GrayText"> @Model.edition</p>
+            <p style="text-align:left;font-family:sans-serif;color:GrayText"> @Model.isbn</p>           
+                 @foreach(DataLayer.author a in Model.authors)
+                 {
+                   <a style="font-family:sans-serif;color:GrayText">@a.first_name @a.last_name </a><b>&nbsp;</b>
+                  }                                   
+            </div>
+           </div> 
+          <hr/>   
+          <div class="row">
+            <div class="span10">             
+              <div class="span3">              
+                <a class="btn btn-large btn-block" href="javascript:updateBook()">Edit</a>
+              </div>             
+              <div class="span3">               
+                <a class="btn btn-large btn-block" href="faq.html">Delete</a>
+              </div>              
+            </div>
+          </div>
 
-<h2>Details</h2>
+ 
+        
 
-<fieldset>
-    <legend>book</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.title)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.isbn)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.isbn)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.edition)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.edition)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.description)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.user.username)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.user.username)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.active)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.active)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -4,47 +4,35 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<fieldset>
-    <legend>author</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.first_name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.first_name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.last_name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.last_name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.biography)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.biography)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.birth_date)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.birth_date)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.active)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.active)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+          
+            <div class="row">
+           <div class="span3 offset1">
+          <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="~/Content/img/author.png"/>
+            
+           </div>
+            <div class="span6">
+                <p><h3>@Model.first_name @Model.last_name</h3></p>                          
+              <article> @Model.biography</article>
+            </div>
+          </div>          
+          
+          <hr />      
+           <div class="row">
+           <div class="span3 offset1">            
+            <p style="text-align:left"><b>Birth Date: </b></p>                           
+            </div>
+            <div class="span3">            
+            <p style="text-align:left">@Html.DisplayNameFor(model => model.birth_date)</p>          
+            </div>
+           </div> 
+          <hr/>   
+          <div class="row">
+            <div class="span10">             
+              <div class="span3">              
+                <a class="btn btn-large btn-block" href="javascript:updateAuthor()">Edit</a>
+              </div>             
+              <div class="span3">               
+                <a class="btn btn-large btn-block" href="faq.html">Delete</a>
+              </div>              
+            </div>
+          </div>

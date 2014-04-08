@@ -7,12 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
 <section id="loginForm">
-<h2>Use a local account to log in.</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -33,11 +28,14 @@
              <li>
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </li>
+            <li>
+                @Html.Raw(Html.GenerateCaptcha()) 
             </li>  
-                             
+                              
         </ol>
-       @Html.Raw(Html.GenerateCaptcha())
-        <input type="submit" value="Log in" />
+     
+        <input type="submit" class="btn btn-large bottom-space" value="Log in" />
     </fieldset>
     <p>
         @Html.ActionLink("Register", "../user") if you don't have an account.

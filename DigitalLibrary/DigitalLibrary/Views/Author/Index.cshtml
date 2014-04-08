@@ -4,54 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.first_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.last_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.biography)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.birth_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.active)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.first_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.last_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.biography)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.birth_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.active)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+@foreach (var item in Model) {    
+<div class="span3">
+<a id="@item.id"  href="javascript:getAuthor(@item.id)" class="thumbnail">
+<img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="~/Content/img/author.png" />
+  
+</a>
+ <div class="caption">
+<h3 style="text-align:center">@item.last_name @item.first_name</h3>                   
+ </div> 
+</div>  
 }
-
-</table>

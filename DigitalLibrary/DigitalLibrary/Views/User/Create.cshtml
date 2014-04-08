@@ -1,18 +1,15 @@
 ﻿@model DigitalLibraryContracts.User
-
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Register</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>User</legend>
+    <fieldset>       
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Username)
@@ -55,7 +52,7 @@
         </div>              
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" class="btn btn-large bottom-space" value="Create" />
         </p>
     </fieldset>
 }

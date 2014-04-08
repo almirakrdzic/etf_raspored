@@ -28,6 +28,12 @@ namespace DigitalLibrary.Controllers
             return View();
         }
 
+        [Authorize(Roles = "administrator")]
+        public ActionResult AdminDashboard()
+        {
+            return View();
+        }
+
         [Authorize(Roles = "user")]
         public ActionResult UserHome()
         {
@@ -45,11 +51,11 @@ namespace DigitalLibrary.Controllers
         public async Task<ActionResult> Login(UserLoginPageModel login, bool captchaValid)       
         {
             
-            if (!captchaValid)
+           /* if (!captchaValid)
              {
                  ModelState.AddModelError("", "Incorrect captcha answer.");
                 return View();
-             }
+             }*/
 
             if (ModelState.IsValid)
             {

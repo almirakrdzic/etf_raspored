@@ -42,5 +42,8 @@ namespace DigitalLibraryContracts
 
         [DataMember]
         public bool IsActive { get; set; }
+
+        [DataMember]
+        public byte[] Image { get; set; }
     }
 }

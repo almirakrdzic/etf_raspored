@@ -57,7 +57,7 @@ namespace DigitalLibrary.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(genre);
+            return Index();
         }
 
         //
@@ -89,30 +89,16 @@ namespace DigitalLibrary.Controllers
             return View(genre);
         }
 
-        //
-        // GET: /Genre/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            genre genre = db.genres.Find(id);
-            if (genre == null)
-            {
-                return HttpNotFound();
-            }
-            return View(genre);
-        }
-
+        
         //
         // POST: /Genre/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]        
         public ActionResult DeleteConfirmed(int id)
         {
             genre genre = db.genres.Find(id);
             db.genres.Remove(genre);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Index();
         }
 
         protected override void Dispose(bool disposing)

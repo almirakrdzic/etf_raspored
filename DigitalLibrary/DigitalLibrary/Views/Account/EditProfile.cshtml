@@ -1,0 +1,41 @@
+﻿@model DigitalLibrary.Models.UserProfileModel
+
+@{
+    ViewBag.Title = "EditProfile";
+}
+
+ <div class="span6 offset1">
+@using (Html.BeginForm("EditProfile","Account",FormMethod.Post,new { id = "login" , enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>        
+        <ol>
+             <li>
+                <div id="drag" class="uploader" ondragenter="return false" ondragover="return false" ondrop="dropIt(event)">                
+                 <img class = "image" id = "img" src="@Url.Action("GetProfilePic", "Account", new {username = @User.Identity.Name})"/>                                         
+                </div>                    
+                <input type="file" name="Image" id="file" multiple="multiple" title='Click to add Files' onchange="imagesSelected(this.files)">
+             </li>
+            <li>                
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+            </li>
+        </ol>
+        <input class="btn" type="submit" id ="send" value="Save" />
+    </fieldset>
+}
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/dmuploaderjs")
+}

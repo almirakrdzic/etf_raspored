@@ -53,7 +53,7 @@ namespace DigitalLibraryService
                 type = newUser.Type.Id,
                 first_name = newUser.FirstName,
                 email = newUser.Email,
-                last_name = newUser.LastName,
+                last_name = newUser.LastName,               
                 active = true
                 
             });
@@ -179,10 +179,9 @@ namespace DigitalLibraryService
             User newUser = null;
 
             using (var db = new DataLayer.DatabaseEntities())
-            {
-                var id = int.Parse(userId);
+            {               
 
-                var user = db.users.Where(us => us.id == id).FirstOrDefault();
+                var user = db.users.Where(us => us.username == userId).FirstOrDefault();
                 if (user == null)
                 {
                     throw new Exception("User with selected ID does not exist!");
@@ -292,7 +291,18 @@ namespace DigitalLibraryService
 
         public void UpdateUser(User u)
         {
-            throw new NotImplementedException();
+            var db = new DataLayer.DatabaseEntities();
+            DataLayer.user user = (from us in db.users where us.username == u.Username select us).FirstOrDefault();
+            if (user != null)
+            {
+                user.first_name = u.FirstName;
+                user.last_name = u.LastName;
+                user.email = u.Email;
+                user.image = u.Image;
+
+                db.SaveChanges();
+            }
+            
         }
 
         public void AddBook(Book k)
