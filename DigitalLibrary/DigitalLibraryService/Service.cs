@@ -274,7 +274,7 @@ namespace DigitalLibraryService
         {
             List<Genre> genres = new List<Genre>();
             var db = new DataLayer.DatabaseEntities();
-            var _genres = db.genres;
+            var _genres = (from g in db.genres where g.active == true select g);
             if (_genres == null)
             {
                 throw new Exception("There are no genres present!");
@@ -322,7 +322,15 @@ namespace DigitalLibraryService
 
         public void DeleteGenre(string genreId)
         {
-            throw new NotImplementedException();
+            int id = Convert.ToInt32(genreId);
+            var db = new DataLayer.DatabaseEntities();
+            var genre = (from b in db.genres where b.id == id select b).FirstOrDefault();
+            
+            if (genre != null)
+            {
+                genre.active = false;
+                db.SaveChanges();
+            }
         }
 
         public void DeleteAuthor(string authorId)
@@ -332,7 +340,14 @@ namespace DigitalLibraryService
 
         public void DeleteBook(string bookId)
         {
-            throw new NotImplementedException();
+            int id = Convert.ToInt32(bookId);
+            var db = new DataLayer.DatabaseEntities();
+            var book = (from b in db.books where b.id == id select b).FirstOrDefault();
+            if (book != null)
+            {
+                db.books.Remove(book);
+                db.SaveChanges();
+            }
         }
 
         public List<Author> GetAllAuthors()
@@ -429,6 +444,19 @@ namespace DigitalLibraryService
         public void DeleteBook(int bookId)
         {
             throw new NotImplementedException();
+        }
+
+
+        public List<User> GetUsers(string query)
+        {
+            var db = new DataLayer.DatabaseEntities();
+            List<User> users = new List<User>();
+            var Db_users = db.users.Where(u => u.username.Contains(query)).ToList();
+            if (Db_users != null)
+            {
+                users = Db_users.Select(u => u.ToContract()).ToList();
+            }
+            return users;
         }
     }
 

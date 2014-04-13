@@ -2,4 +2,102 @@
     ViewBag.Title = "AdminDashboard";
 }
 
-<h2>AdminDashboard</h2>
+
+<div class="container-fluid">
+            <div class="row-fluid">
+               <div class="span3" id="sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                        <li class="active">
+                            <a id="dashboard" href="http://localhost:52464/Home/AdminDashboard"><i class="icon-chevron-right"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a id="users" href="http://localhost:52464/User/Index"><i class="icon-chevron-right"></i> Users</a>
+                        </li>
+                        <li>
+                            <a id="books" href="http://localhost:52464/Book/Index"><i class="icon-chevron-right"></i> Books</a>
+                        </li>
+                        <li>
+                            <a id="genres" href="http://localhost:52464/Genre/Index"><i class="icon-chevron-right"></i> Genres</a>
+                        </li>
+                        <li>
+                            <a id="authors" href="http://localhost:52464/Author/Index"><i class="icon-chevron-right"></i> Authors</a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                
+                <!--/span-->
+                <div class="span9" id="content">         
+
+          <div  id="show" class="row-fluid">              
+ 
+          <div class="span12">
+            <div class="span4">
+             <div class="navbar navbar-inner block-header">
+            <div class="muted pull-left">Downloads by genres</div>           
+             </div>
+            <div class="block">                   
+            <canvas id="doughnut" ></canvas>               
+            </div>
+            </div>
+			 <div class="span4">
+             <div class="navbar navbar-inner block-header">
+            <div class="muted pull-left">Uploads by genres</div>  
+            </div>
+            <div class="block">                   
+            <canvas id="doughnut1" ></canvas>               
+            </div>
+           </div>
+			 <div class="span4">
+             <div class="navbar navbar-inner block-header">
+            <div class="muted pull-left">Logins by day</div>  
+            </div>
+            <div class="block">                   
+            <canvas id="line" ></canvas>               
+            </div>
+           </div>
+          </div>
+          <div class="span12">
+			 <div class="span4">
+             <div class="navbar navbar-inner block-header">
+            <div class="muted pull-left">Uploads and downloads by month</div>  
+            </div>
+            <div class="block">                   
+            <canvas id="bar" ></canvas>               
+            </div>
+           </div>
+			 <div class="span4">
+             <div class="navbar navbar-inner block-header">
+            <div class="muted pull-left">Visits by genres</div>  
+            </div>
+            <div class="block">                   
+            <canvas id="pie1" ></canvas>               
+            </div>
+           </div>
+			 <div class="span4">
+             <div class="navbar navbar-inner block-header">
+            <div class="muted pull-left">Authors by genre</div>  
+            </div>
+            <div class="block">                   
+            <canvas id="pie" ></canvas>               
+            </div>
+           </div>
+		</div>
+                  
+                         </div>
+                </div>
+            </div>
+
+   
+     @section Scripts{
+    @Scripts.Render("~/bundles/piechartjs") 
+    @Scripts.Render("~/bundles/ajaxjs") 
+    @Scripts.Render("~/bundles/adminjs")    
+    @Scripts.Render("~/bundles/dmuploaderjs")
+
+ <script src="~/Scripts/Chart.js"></script>
+  <script src="~/Scripts/graf.js"></script>
+}
+
+
+

@@ -117,11 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActiveRequired" xml:space="preserve">
+    <value>Active is required</value>
+  </data>
+  <data name="BirthDateRequired" xml:space="preserve">
+    <value>Birth date is required</value>
+  </data>
   <data name="EmailRequired" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="EmailRequired1" xml:space="preserve">
     <value>Email is required</value>
   </data>
   <data name="FirstNameRequired" xml:space="preserve">
     <value>First name is required</value>
+  </data>
+  <data name="FirstNameRequired1" xml:space="preserve">
+    <value>First name is required</value>
+  </data>
+  <data name="GenreRequired" xml:space="preserve">
+    <value>Genre name is required</value>
+  </data>
+  <data name="ISBNRequired" xml:space="preserve">
+    <value>ISBN is required</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Choose a language</value>
@@ -129,10 +147,31 @@
   <data name="LastNameRequired" xml:space="preserve">
     <value>Last name is required</value>
   </data>
+  <data name="LastNameRequired1" xml:space="preserve">
+    <value>Last name is required</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
   <data name="PasswordRequired" xml:space="preserve">
     <value>Password is required</value>
   </data>
+  <data name="PasswordRequired1" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="TitleRequired" xml:space="preserve">
+    <value>Title is required</value>
+  </data>
+  <data name="UserAdedRequired" xml:space="preserve">
+    <value>User who added book is required</value>
+  </data>
   <data name="UsernameRequired" xml:space="preserve">
     <value>Username is required</value>
+  </data>
+  <data name="UsernameRequired1" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="UserRequired" xml:space="preserve">
+    <value>User is required</value>
   </data>
 </root>

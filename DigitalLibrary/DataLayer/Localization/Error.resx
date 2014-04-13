@@ -147,4 +147,7 @@
   <data name="UserRequired" xml:space="preserve">
     <value>User is required</value>
   </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
 </root>

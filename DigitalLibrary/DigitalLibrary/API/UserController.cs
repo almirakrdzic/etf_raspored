@@ -13,10 +13,10 @@ namespace DigitalLibrary.API
     public class UserController : ApiController
     {
         // GET api/user
-        public List<User> Get()
+        public List<User> Get(string query)
         {
             Service service = new Service();
-            List<User> users = service.GetAllUsers();
+            List<User> users = service.GetUsers(query);
             return users;
         }
 

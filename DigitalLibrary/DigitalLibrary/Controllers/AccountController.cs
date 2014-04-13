@@ -10,6 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using DigitalLibrary.Filters;
 using DigitalLibrary.Models;
+using System.Drawing;
+using System.IO;
 
 namespace DigitalLibrary.Controllers
 {
@@ -37,7 +39,7 @@ namespace DigitalLibrary.Controllers
             user.Username = HttpContext.User.Identity.Name;
             user.FirstName = profile.FirstName;
             user.LastName = profile.LastName;
-            user.Email = profile.Email;
+            user.Email = profile.Email;           
             Int32 length = profile.Image.ContentLength;
             user.Image = new byte[length];
             profile.Image.InputStream.Read(user.Image, 0, length);            
@@ -51,7 +53,7 @@ namespace DigitalLibrary.Controllers
             {
                 return RedirectToAction("UserHome", "Home");
             }
-            return RedirectToAction("Login","Home");       
+            return RedirectToAction("Index","Home");       
 
         }
 
@@ -60,7 +62,16 @@ namespace DigitalLibrary.Controllers
             var userImage = new byte[] { };            
             DigitalLibraryService.Service service = new DigitalLibraryService.Service();
             DigitalLibraryContracts.User user = service.GetUser(username);
-            return File(user.Image, "image/png");
+            if (user.Image == null)
+            {
+                MemoryStream stream = new MemoryStream();
+                Image im = Image.FromFile(Server.MapPath("~//Content//img//user.png"));
+                im.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] bytes = stream.ToArray();                
+                return File(bytes, "image/png");
+            }           
+
+            return File(user.Image, "image/jpg");
         }
     }
 }

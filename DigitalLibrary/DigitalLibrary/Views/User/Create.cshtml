@@ -1,12 +1,5 @@
-﻿<!DOCTYPE html>
-  <html>
-  <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width" />
-      <title>@ViewBag.Title</title>
-      @Styles.Render("~/Content/bootstrapcss")
-  </head>
-  <body>
+﻿
+@using Recaptcha;
 @model DigitalLibraryContracts.User
 
 @{
@@ -14,8 +7,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-@using (Html.BeginForm()) {
+<div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span8" id="sidebar">  
+                    <!--  Carousel - consult the Twitter Bootstrap docs at -->
+<div id="this-carousel-id" class="carousel slide"><!-- class of slide for animation -->
+  <div class="carousel-inner">
+    <div class="item active"><!-- class of active since it's the first item -->
+      <img src="http://www.3dtotal.com/admin/new_cropper/tutorial_content_images/1573_tid_fig10.jpg" alt="" />
+      <div class="carousel-caption">
+        <p>Caption text here</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="http://www.3dtotal.com/admin/new_cropper/tutorial_content_images/1573_tid_fig01.jpg" alt="" />
+      <div class="carousel-caption">
+        <p>Caption text here</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="http://2.bp.blogspot.com/-peGDqWCDM7I/UgBCQizqh1I/AAAAAAAABog/zIELKW_s0zw/s1600/ttt+8.5.13+1.jpg" alt="" />
+      <div class="carousel-caption">
+        <p>Caption text here</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="http://1.bp.blogspot.com/-gPprtnmTPO4/UkGPMy-DkQI/AAAAAAAAF8I/EL_U_QsjgbA/s1600/Book+love.jpg" alt="" />
+      <div class="carousel-caption">
+        <p>Caption text here</p>
+      </div>
+    </div>
+  </div>
+    <!-- /.carousel-inner -->
+  <!--  Next and Previous controls below
+        href values must reference the id for this carousel -->
+    <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
+</div><!-- /.carousel -->   
+                </div>                
+                <!--/span-->
+                 
+                <div class="span4" id="content">          
+                  
+                    <div class="row-fluid">
+                        <!-- block -->
+                                                 
+                            <div id="indexshow" class="block-content collapse in"> 
+                                
+  @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -59,42 +98,30 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
-        </div>       
-        
-         <div class="dropdown">
-                         <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                           <span class="caret"></span>
-                         </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                      <li role="presentation"><a role="menuitem" tabindex="-1">@Html.ActionLink("ENG", "SetCulture", new { controller = "User", culture = "en" })  </a></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1">@Html.ActionLink("HR", "SetCulture", new { controller = "User", culture = "hr" })</a></li>
-    
-                     </ul>
-                     </div>
-
+        </div>        
+         <div>
+             @Html.Raw(Html.GenerateCaptcha()) 
+         </div>     
+        <p></p>      
+        <p></p>
         <p>
             <input type="submit" class="btn btn-large bottom-space" value="Create" />
         </p>
     </fieldset>
 }
+                                                              
+                            </div>                       
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-            <script type="text/javascript">
-                 $(function () {
-                     $('.dropdown-toggle').dropdown('toggle');
-                 });
-             </script>
-
-    @Scripts.Render("~/bundles/jqueryval")
-    @Styles.Render("~/bundles/jquery")
-@Styles.Render("~/bundles/bootstrapjs")
- <script src="~/Scripts/jquery-1.8.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @section Scripts{
+    @Scripts.Render("~/bundles/piechartjs") 
+    @Scripts.Render("~/bundles/ajaxjs")
+   
+}
 
 
 
-</body>
-  </html>
+   

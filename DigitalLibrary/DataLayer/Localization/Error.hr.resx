@@ -147,4 +147,7 @@
   <data name="UserRequired" xml:space="preserve">
     <value>Potrebno je odabrati korisnika</value>
   </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Potrebno je unijeti naziv</value>
+  </data>
 </root>

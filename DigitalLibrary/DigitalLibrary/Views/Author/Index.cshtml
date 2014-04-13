@@ -4,7 +4,38 @@
     ViewBag.Title = "Index";
 }
 
-@foreach (var item in Model) {    
+<div class="container-fluid">
+             <div class="row-fluid">
+                <div class="span3" id="sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                        <li class="active">
+                            <a id="dashboard" href="http://localhost:52464/Home/AdminDashboard"><i class="icon-chevron-right"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a id="users" href="http://localhost:52464/User/Index"><i class="icon-chevron-right"></i> Users</a>
+                        </li>
+                        <li>
+                            <a id="books" href="http://localhost:52464/Book/Index"><i class="icon-chevron-right"></i> Books</a>
+                        </li>
+                        <li>
+                            <a id="genres" href="http://localhost:52464/Genre/Index"><i class="icon-chevron-right"></i> Genres</a>
+                        </li>
+                        <li>
+                            <a id="authors" href="http://localhost:52464/Author/Index"><i class="icon-chevron-right"></i> Authors</a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                
+                <!--/span-->
+                <div class="span9" id="content">         
+
+                    <div  class="row-fluid">
+                        <!-- block -->
+ <div class="block">                          
+ <div id="show" class="block-content collapse in">
+     <div class="span12"></div>
+     @foreach (var item in Model) {    
 <div class="span3">
 <a id="@item.id"  href="javascript:getAuthor(@item.id)" class="thumbnail">
 <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="~/Content/img/author.png" />
@@ -14,4 +45,30 @@
 <h3 style="text-align:center">@item.last_name @item.first_name</h3>                   
  </div> 
 </div>  
+}                               
+ </div>
+ </div>
+
+                    </div>
+                </div>
+           
+                
+               
+ 
+          
+
+
+
+ </div>
+</div>
+
+
+    @section Scripts{
+    @Scripts.Render("~/bundles/piechartjs") 
+    @Scripts.Render("~/bundles/ajaxjs") 
+    @Scripts.Render("~/bundles/adminjs")    
+    @Scripts.Render("~/bundles/dmuploaderjs")
 }
+
+
+             

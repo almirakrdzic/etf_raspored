@@ -5,7 +5,9 @@
 }
 
 
-@using (Html.BeginForm("Create","Genre",FormMethod.Post,new { id = "createGenre"})) {
+
+@using (Ajax.BeginForm("Create", "Genre",new AjaxOptions{UpdateTargetId = "show"}))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()   
     <fieldset>
@@ -17,16 +19,10 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.name)
             @Html.ValidationMessageFor(model => model.name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.active)
-        </div>
+        </div>              
         <div class="editor-field">
-            @Html.EditorFor(model => model.active)
-            @Html.ValidationMessageFor(model => model.active)
+            @Html.HiddenFor(model => model.active)          
         </div>
-
         <p>
             <input class="btn" type="submit" value="Create" />
         </p>

@@ -11,15 +11,15 @@ namespace DigitalLibraryContracts
         {
             var newBook = new Book()
             {
-                Id=book.id,
-                AddedBy=new User()
+                Id = book.id,
+                AddedBy = new User()
                 {
-                    Id=book.added_by
+                    Id = book.added_by
                 },
-                Description=book.description,
-                Edition=book.edition,
-                ISBN=book.isbn,
-                Title=book.isbn,
+                Description = book.description,
+                Edition = book.edition,
+                ISBN = book.isbn,
+                Title = book.isbn,
                 Content = book.data
             };
             return newBook;
@@ -30,9 +30,9 @@ namespace DigitalLibraryContracts
         {
             Author newAuthor = new Author()
             {
-                Id=author.id,
-                FirstName=author.first_name,
-                LastName=author.last_name
+                Id = author.id,
+                FirstName = author.first_name,
+                LastName = author.last_name
             };
             return newAuthor;
         }
@@ -73,6 +73,24 @@ namespace DigitalLibraryContracts
             };
 
             return ugenre;
+        }
+
+        public static DataLayer.user ToModel(this User user)
+        {
+            DataLayer.user newUser = new DataLayer.user()
+            {
+                id = user.Id,
+                username = user.Username,
+                first_name = user.FirstName,
+                last_name = user.LastName,
+                email = user.Email,
+                password = user.Password,
+                confirmationToken = user.ConfirmationToken,
+                isConfirmed = user.IsConfirmed,
+                active = user.IsActive,
+                type = user.Type.Id
+            };
+            return newUser;
         }
     }
 }

@@ -68,6 +68,10 @@ namespace DigitalLibraryService
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/All")]
         List<User> GetAllUsers();
 
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/All/")]
+        List<User> GetUsers(string query);
+
         /*[OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "users/edit/{userId}")] 
         void UpdateUser(User u);*/

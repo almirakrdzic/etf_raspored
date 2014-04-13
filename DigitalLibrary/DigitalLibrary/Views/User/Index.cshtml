@@ -1,0 +1,95 @@
+﻿@model IEnumerable<DataLayer.user>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid">
+             <div class="row-fluid">
+                <div class="span3" id="sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                        <li class="active">
+                            <a id="dashboard" href="http://localhost:52464/Home/AdminDashboard"><i class="icon-chevron-right"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a id="users" href="http://localhost:52464/User/Index"><i class="icon-chevron-right"></i> Users</a>
+                        </li>
+                        <li>
+                            <a id="books" href="http://localhost:52464/Book/Index"><i class="icon-chevron-right"></i> Books</a>
+                        </li>
+                        <li>
+                            <a id="genres" href="http://localhost:52464/Genre/Index"><i class="icon-chevron-right"></i> Genres</a>
+                        </li>
+                        <li>
+                            <a id="authors" href="http://localhost:52464/Author/Index"><i class="icon-chevron-right"></i> Authors</a>
+                        </li>
+                       
+                    </ul>
+                </div>
+                
+                <!--/span-->
+                <div class="span9" id="content">         
+
+                    <div  id="show" class="row-fluid">
+                       
+                    </div>
+                </div>
+           
+                
+                <!--/span-->
+                <div class="span9" id="content">          
+ 
+                    <div  id="show" class="row-fluid">                       
+
+ <!-- block -->
+ <div class="block">                          
+ <div class="block-content collapse in">    
+     <!-- aplikacija -->
+<div ng-app="UserApp">
+<div ng-controller="userCtrl">
+<div class="span12"></div>
+<div class="span12">
+ <div class="muted pull-left">
+<input type="text" ng-change="search()" ng-model="query" class="input-medium search-query" placeholder="Search" value="">
+<button ng-click="search()" type="submit" class="btn"><i class="icon-search"></i></button>
+</div>
+</div>
+<div class="span12"></div>
+<div class="span12">
+<div ng-repeat="item in items" class="span3">
+<a id="{{item.Id}}"  ng-href="http://localhost:52464/User/Details/?id={{item.Id}}" class="thumbnail">
+<img style="width: 260px; height: 180px;" ng-src="http://localhost:52464/User/GetProfilePic/?username={{item.Username}}"/>
+</a>
+<div class="caption">
+<h3 style="text-align:center">{{item.Username}}</h3>                   
+</div> 
+</div> 
+</div>
+</div>
+</div>                      
+ </div>
+ </div>
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-resource.js"></script>
+<script src="~/Scripts/app.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+</div>
+</div>
+ </div>
+</div>
+
+
+    @section Scripts{
+    @Scripts.Render("~/bundles/piechartjs") 
+    @Scripts.Render("~/bundles/ajaxjs") 
+    @Scripts.Render("~/bundles/adminjs")    
+    @Scripts.Render("~/bundles/dmuploaderjs")
+}
+
+
+ 
+  
+
+
+

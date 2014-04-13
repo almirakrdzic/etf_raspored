@@ -11,21 +11,28 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class author
     {
         public author()
         {
             this.books = new HashSet<book>();
         }
-    
+
         public int id { get; set; }
+        [Display(Name = "First Name")]
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "FirstNameRequired")]
         public string first_name { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "LastNameRequired")]
         public string last_name { get; set; }
+
         public string biography { get; set; }
         public Nullable<System.DateTime> birth_date { get; set; }
         public Nullable<bool> active { get; set; }
-    
+
         public virtual ICollection<book> books { get; set; }
     }
 }

@@ -23,6 +23,24 @@ namespace DigitalLibrary.Controllers
             return View();
         }
 
+        public ActionResult SetCulture(string culture)
+        {
+            // Validate input
+            culture = CultureHelper.GetImplementedCulture(culture);
+            // Save culture in a cookie
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+                cookie.Value = culture;   // update cookie value
+            else
+            {
+                cookie = new HttpCookie("_culture");
+                cookie.Value = culture;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie);
+            return RedirectToAction("Index");
+        }
+
         [Authorize(Roles = "administrator")]
         public ActionResult AdminHome()
         {
@@ -35,7 +53,7 @@ namespace DigitalLibrary.Controllers
             return View();
         }
 
-        [Authorize(Roles = "user")]
+       // [Authorize(Roles = "user")]
         public ActionResult UserHome()
         {
             return View();
@@ -47,16 +65,10 @@ namespace DigitalLibrary.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [RecaptchaControlMvc.CaptchaValidatorAttribute]
-        public async Task<ActionResult> Login(UserLoginPageModel login, bool captchaValid)       
-        {
-            
-           /* if (!captchaValid)
-             {
-                 ModelState.AddModelError("", "Incorrect captcha answer.");
-                return View();
-             }*/
+        [ValidateAntiForgeryToken]       
+        public async Task<ActionResult> Login(UserLoginPageModel login)       
+        {          
+          
 
             if (ModelState.IsValid)
             {
@@ -70,7 +82,7 @@ namespace DigitalLibrary.Controllers
                 }
                 catch
                 {
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Index");
                 }
 
 
@@ -83,7 +95,7 @@ namespace DigitalLibrary.Controllers
                     return RedirectToAction("UserHome", "Home");                
                }
         }
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

@@ -22,7 +22,7 @@ namespace DigitalLibraryContracts.Localization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Error {
+    public class Error {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DigitalLibraryContracts.Localization {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DigitalLibraryContracts.Localization.Error", typeof(Error).Assembly);
@@ -51,7 +51,7 @@ namespace DigitalLibraryContracts.Localization {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,27 +61,81 @@ namespace DigitalLibraryContracts.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active is required.
+        /// </summary>
+        public static string ActiveRequired {
+            get {
+                return ResourceManager.GetString("ActiveRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birth date is required.
+        /// </summary>
+        public static string BirthDateRequired {
+            get {
+                return ResourceManager.GetString("BirthDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email is required.
         /// </summary>
-        internal static string EmailRequired {
+        public static string EmailRequired {
             get {
                 return ResourceManager.GetString("EmailRequired", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email is required.
+        /// </summary>
+        public static string EmailRequired1 {
+            get {
+                return ResourceManager.GetString("EmailRequired1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name is required.
         /// </summary>
-        internal static string FirstNameRequired {
+        public static string FirstNameRequired {
             get {
                 return ResourceManager.GetString("FirstNameRequired", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First name is required.
+        /// </summary>
+        public static string FirstNameRequired1 {
+            get {
+                return ResourceManager.GetString("FirstNameRequired1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Genre name is required.
+        /// </summary>
+        public static string GenreRequired {
+            get {
+                return ResourceManager.GetString("GenreRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ISBN is required.
+        /// </summary>
+        public static string ISBNRequired {
+            get {
+                return ResourceManager.GetString("ISBNRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose a language.
         /// </summary>
-        internal static string Language {
+        public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
             }
@@ -90,27 +144,90 @@ namespace DigitalLibraryContracts.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Last name is required.
         /// </summary>
-        internal static string LastNameRequired {
+        public static string LastNameRequired {
             get {
                 return ResourceManager.GetString("LastNameRequired", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last name is required.
+        /// </summary>
+        public static string LastNameRequired1 {
+            get {
+                return ResourceManager.GetString("LastNameRequired1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is required.
+        /// </summary>
+        public static string NameRequired {
+            get {
+                return ResourceManager.GetString("NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is required.
         /// </summary>
-        internal static string PasswordRequired {
+        public static string PasswordRequired {
             get {
                 return ResourceManager.GetString("PasswordRequired", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password is required.
+        /// </summary>
+        public static string PasswordRequired1 {
+            get {
+                return ResourceManager.GetString("PasswordRequired1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is required.
+        /// </summary>
+        public static string TitleRequired {
+            get {
+                return ResourceManager.GetString("TitleRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User who added book is required.
+        /// </summary>
+        public static string UserAdedRequired {
+            get {
+                return ResourceManager.GetString("UserAdedRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username is required.
         /// </summary>
-        internal static string UsernameRequired {
+        public static string UsernameRequired {
             get {
                 return ResourceManager.GetString("UsernameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username is required.
+        /// </summary>
+        public static string UsernameRequired1 {
+            get {
+                return ResourceManager.GetString("UsernameRequired1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User is required.
+        /// </summary>
+        public static string UserRequired {
+            get {
+                return ResourceManager.GetString("UserRequired", resourceCulture);
             }
         }
     }

@@ -14,9 +14,17 @@
               <article> @Model.description</article>
             </div>
           </div>            
-          
-          <hr />      
-           <div class="row">
+<div class="row-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Details<span class="icon-bar"></span> <img src="~/Content/img/glyphicons_432_plus.png"; background-repeat: no-repeat; background-position: 6px center/> </span>
+     
+      </button>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+      <div class="row">
            <div class="span3 offset1">            
             <p style="text-align:left"><b>Added by: </b></p>    
             <p style="text-align:left"><b>Edition: </b></p>
@@ -33,14 +41,18 @@
                   }                                   
             </div>
            </div> 
+      
+    </div><!-- /.navbar-collapse -->
+  </div>
+          <hr />                 
           <hr/>   
           <div class="row">
             <div class="span10">             
               <div class="span3">              
-                <a class="btn btn-large btn-block" href="javascript:updateBook()">Edit</a>
+                <a class="btn btn-large btn-block" href="javascript:updateBook(@Model.id)">Edit</a>
               </div>             
               <div class="span3">               
-                <a class="btn btn-large btn-block" href="faq.html">Delete</a>
+                <a class="btn btn-large btn-block" href="javascript:deleteBook(@Model.id)">Delete</a>
               </div>              
             </div>
           </div>

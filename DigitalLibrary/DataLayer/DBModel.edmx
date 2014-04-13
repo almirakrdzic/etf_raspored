@@ -149,6 +149,8 @@
           <Property Name="type" Type="int" Nullable="false" />
           <Property Name="active" Type="bit" />
           <Property Name="image" Type="varbinary(max)" />
+          <Property Name="isConfirmed" Type="bit" />
+          <Property Name="confirmationToken" Type="nchar" MaxLength="64" />
         </EntityType>
         <Association Name="FK_author_id">
           <End Role="authors" Type="digital_libraryModel.Store.authors" Multiplicity="1" />
@@ -341,6 +343,8 @@
           <NavigationProperty Name="books1" Relationship="digital_libraryModel.downloaded_books" FromRole="users" ToRole="books" />
           <Property Type="Boolean" Name="active" />
           <Property Type="Binary" Name="image" MaxLength="Max" FixedLength="false" />
+          <Property Type="Boolean" Name="isConfirmed" />
+          <Property Type="String" Name="confirmationToken" MaxLength="64" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_books_added">
           <End Role="users" Type="digital_libraryModel.user" Multiplicity="1" />
@@ -431,6 +435,8 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="digital_libraryModel.user">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="confirmationToken" ColumnName="confirmationToken" />
+                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />

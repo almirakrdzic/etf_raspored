@@ -10,7 +10,10 @@ using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 using DigitalLibraryContracts.Helpers;
-
+using System.Drawing;
+using System.IO;
+using Recaptcha;
+using DataLayer;
 namespace DigitalLibrary.Controllers
 {
     public class UserController : BaseController
@@ -20,64 +23,70 @@ namespace DigitalLibrary.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("Create");
+            var db = new DataLayer.DatabaseEntities();
+            return View(db.users.Where(u => u.active == true).ToList());
         }
 
         public ActionResult Create()
         {
             return View();
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(User user)
+        [RecaptchaControlMvc.CaptchaValidatorAttribute]
+        public ActionResult Create(User user, bool captchaValid)
         {
+            if (!captchaValid)
+            {
+                ModelState.AddModelError("", "Incorrect captcha answer.");
+                return View();
+            }
+
             if (ModelState.IsValid)
             {
-                Service s = new Service();
-                user.Type = new UserType()
+                if (ModelState.IsValid)
                 {
-                    Id = 1
-                };
-                s.AddNewUser(user);
-                return RedirectToAction("Login", "Home");
+                    // Attempt to register the user
+                    try
+                    {
+                        dynamic email = new Email("Email");
+                        email.To = user.Email;
+                        email.UserName = user.Username;
+                        email.ConfirmationToken = Guid.NewGuid().ToString("N");
+                        Session["ConfirmationToken"] = email.ConfirmationToken;
+                        email.Send();
+
+                        user.Type = new UserType()
+                        {
+                            Id = 1
+                        };
+                        user.ConfirmationToken = email.ConfirmationToken;
+                        user.IsActive = false;
+                        user.IsConfirmed = false;
+                        using (var db = new DatabaseEntities())
+                        {
+
+                            db.users.Add(user.ToModel());
+                            db.SaveChanges();
+                        }
+
+                        return RedirectToAction("WaitingForConfirmation", "User");
+                    }
+                    catch (MembershipCreateUserException e)
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    }
+                }
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
                 return View();
             }
-            
-        }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                try
-                {
-                    string confirmationToken =
-                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { Email = model.Email }, true);
-                    dynamic email = new Email("RegEmail");
-                    email.To = model.Email;
-                    email.UserName = model.UserName;
-                    email.ConfirmationToken = confirmationToken;
-                    email.Send();
-
-                    return RedirectToAction("RegisterStepTwo", "Account");
-                }
-                catch (MembershipCreateUserException e)
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+        }      
 
         private string ErrorCodeToString(MembershipCreateStatus membershipCreateStatus)
         {
@@ -91,9 +100,10 @@ namespace DigitalLibrary.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult RegisterConfirmation(string Id)
+        public ActionResult RegisterConfirmation(Guid Id)
         {
-            if (WebSecurity.ConfirmAccount(Id))
+            var confirmationToken = Session["ConfirmationToken"].ToString();
+            if (new Guid(confirmationToken) == Id)
             {
                 return RedirectToAction("ConfirmationSuccess");
             }
@@ -103,6 +113,17 @@ namespace DigitalLibrary.Controllers
         [AllowAnonymous]
         public ActionResult ConfirmationSuccess()
         {
+            using (var db = new DatabaseEntities())
+            {
+                var confirmationToken = Session["ConfirmationToken"].ToString();
+                var user = db.users.Where(u => u.confirmationToken == confirmationToken).FirstOrDefault();
+                if (user != null)
+                {
+                    user.isConfirmed = true;
+                    user.active = true;
+                    db.SaveChanges();
+                }
+            }
             return View();
         }
 
@@ -112,23 +133,46 @@ namespace DigitalLibrary.Controllers
             return View();
         }
 
-        public ActionResult SetCulture(string culture)
+        [AllowAnonymous]
+        public ActionResult WaitingForConfirmation()
         {
-            // Validate input
-            culture = CultureHelper.GetImplementedCulture(culture);
-            // Save culture in a cookie
-            HttpCookie cookie = Request.Cookies["_culture"];
-            if (cookie != null)
-                cookie.Value = culture;   // update cookie value
-            else
+            return View();
+        }
+     
+
+        public ActionResult Details(int id)
+        {
+            var db = new DataLayer.DatabaseEntities();
+            DataLayer.user user = db.users.Find(id);
+            return View(user);
+
+        }
+
+        public ActionResult PromoteUser(int id)
+        {
+            var db = new DataLayer.DatabaseEntities();
+            DataLayer.user user = db.users.Find(id);
+            user.type = 1;
+            db.SaveChanges();
+            return View("Details",user);
+        }
+
+        public FileContentResult GetProfilePic(string username)
+        {
+            var userImage = new byte[] { };
+            DigitalLibraryService.Service service = new DigitalLibraryService.Service();
+            DigitalLibraryContracts.User user = service.GetUser(username);
+            if (user.Image == null)
             {
-                cookie = new HttpCookie("_culture");
-                cookie.Value = culture;
-                cookie.Expires = DateTime.Now.AddYears(1);
+                MemoryStream stream = new MemoryStream();               
+                Image im = Image.FromFile(Server.MapPath("~//Content//img//user.png"));
+                im.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] bytes = stream.ToArray();
+                return File(bytes, "image/png");
             }
-            Response.Cookies.Add(cookie);
-            return RedirectToAction("Index");
-        }  
+
+            return File(user.Image, "image/jpg");
+        }
 
     }
 }

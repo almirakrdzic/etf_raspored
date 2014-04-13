@@ -1,5 +1,5 @@
 ﻿@model DigitalLibrary.Models.UserLoginPageModel
-@using Recaptcha;
+
 
 
 @{
@@ -13,8 +13,8 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
+        <legend></legend>
+        <ul style="list-style-type:none">
             <li>
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
@@ -28,17 +28,14 @@
              <li>
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-            <li>
-                @Html.Raw(Html.GenerateCaptcha()) 
-            </li>  
+            </li>           
                               
-        </ol>
+        </ul>
      
         <input type="submit" class="btn btn-large bottom-space" value="Log in" />
     </fieldset>
     <p>
-        @Html.ActionLink("Register", "../user") if you don't have an account.
+        <a href="http://localhost:52464/User/Create">Register</a> if you don't have an account.
     </p>
 }
 </section>

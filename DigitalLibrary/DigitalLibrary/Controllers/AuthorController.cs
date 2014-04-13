@@ -19,7 +19,7 @@ namespace DigitalLibrary.Controllers
 
         public ActionResult Index()
         {
-            return View(db.authors.ToList());
+            return View(db.authors.Where(a=>a.active==true).ToList());
         }
 
         //
@@ -84,7 +84,7 @@ namespace DigitalLibrary.Controllers
             {
                 db.Entry(author).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("Delete", db.authors.Where(a => a.active == true).ToList());
             }
             return View(author);
         }
@@ -99,7 +99,9 @@ namespace DigitalLibrary.Controllers
             {
                 return HttpNotFound();
             }
-            return View(author);
+            author.active = false;
+            db.SaveChanges();
+            return View("Delete",db.authors.Where(a=>a.active==true).ToList());
         }
 
         //

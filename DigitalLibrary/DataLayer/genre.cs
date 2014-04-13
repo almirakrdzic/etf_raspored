@@ -6,23 +6,29 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class genre
     {
         public genre()
         {
             this.books = new HashSet<book>();
         }
-    
+
         public int id { get; set; }
+
+
+        [Display(Name = "Genre")]
+        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "GenreNameRequired")]
         public string name { get; set; }
+
         public Nullable<bool> active { get; set; }
-    
+
         public virtual ICollection<book> books { get; set; }
     }
 }

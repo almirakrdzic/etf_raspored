@@ -45,5 +45,11 @@ namespace DigitalLibraryContracts
 
         [DataMember]
         public byte[] Image { get; set; }
+
+        [DataMember]
+        public bool IsConfirmed { get; set; }
+
+        [DataMember]
+        public string ConfirmationToken { get; set; }
     }
 }

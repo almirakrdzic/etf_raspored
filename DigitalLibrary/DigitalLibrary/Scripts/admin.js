@@ -3,65 +3,6 @@
     $('.chart').easyPieChart({ animate: 1000 });
 });
 
-$(function () {
-    $("#dashboard").on('click', function () {
-        $.ajax({
-            url: "/Home/AdminDashboard",
-            type: 'GET',
-            data: null,
-            success: function (result) {
-                $("#show").html(result);
-            }
-        });
-        return false;
-    });
-
-});
-
-$(function () {
-    $("#books").on('click', function () {
-        $.ajax({
-            url: "/Book/Index",
-            type: 'GET',
-            data: null,
-            success: function (result) {
-                $("#show").html(result);
-            }
-        });
-        return false;
-    });
-
-});
-
-$(function () {
-    $("#genres").on('click', function () {
-        $.ajax({
-            url: "/Genre/Index",
-            type: 'GET',
-            data: null,
-            success: function (result) {
-                $("#show").html(result);
-            }
-        });
-        return false;
-    });
-
-});
-
-$(function () {
-    $("#authors").on('click', function () {
-        $.ajax({
-            url: "/Author/Index",
-            type: 'GET',
-            data: null,
-            success: function (result) {
-                $("#show").html(result);
-            }
-        });
-        return false;
-    });
-
-});
 
 function getBook(idd) {    
     var dat = parseInt(idd);
@@ -76,11 +17,12 @@ function getBook(idd) {
     return false;
 }
 
-function updateBook() {   
+function getUser(idd) {
+    var dat = parseInt(idd);
     $.ajax({
-        url: "/Book/Create",
+        url: "/User/Details",
         type: 'GET',
-        data: null,
+        data: { id: dat },
         success: function (result) {
             $("#show").html(result);
         }
@@ -88,11 +30,76 @@ function updateBook() {
     return false;
 }
 
-function updateAuthor() {
+function promoteUser(idd) {
+
+    var dat = parseInt(idd);
     $.ajax({
-        url: "/Author/Create",
+        url: "/User/PromoteUser",
         type: 'GET',
-        data: null,
+        data: { id: dat },
+        success: function (result) {
+            $("#show").html(result);
+        }
+    });
+}
+function updateBook(idd) {
+    var dat = parseInt(idd);
+    $.ajax({
+        url: "/Book/Edit",
+        type: 'GET',
+        data: { id: dat },
+        success: function (result) {
+            $("#show").html(result);
+        }
+    });
+    return false;
+}
+
+function deleteBook(idd) {
+    var dat = parseInt(idd);
+    $.ajax({
+        url: "/Book/Delete",
+        type: 'GET',
+        data: { id: dat },
+        success: function (result) {
+            $("#show").html(result);
+        }
+    });
+    return false;
+}
+
+function updateAuthor(idd) {
+    var dat = parseInt(idd);
+    $.ajax({
+        url: "/Author/Edit",
+        type: 'GET',
+        data: { id: dat },
+        success: function (result) {
+            $("#show").html(result);
+        }
+    });
+    return false;
+}
+
+function deleteAuthor(idd) {
+    var dat = parseInt(idd);
+    $.ajax({
+        url: "/Author/Delete",
+        type: 'GET',
+        data: { id: dat },
+        success: function (result) {
+            $("#show").html(result);
+        }
+    });
+    return false;
+}
+
+function editGenre(idd) {
+    var dat = parseInt(idd);
+    $.ajax({
+        url: "/Genre/Edit",
+        type: 'GET',
+        data: {id : dat},
         success: function (result) {
             $("#show").html(result);
         }
@@ -101,10 +108,10 @@ function updateAuthor() {
 }
 
 function deleteGenre(idd) {
-    var dat = parseInt(idd);   
-    $.post("/Genre/DeleteConfirmed", { id: dat }, function (result) {
+    var dat = parseInt(idd);
+    $.post("/Genre/Delete", { id: dat }, function (result) {
         $("#show").html(result);
-    });  
+    });
     return false;
 }
 
@@ -114,24 +121,12 @@ function addGenre() {
         type: 'GET',
         data: null,
         success: function (result) {
-            $("#newGenre").html(result);
+            $("#show").html(result);
         }
     });
     return false;    
 }
 
-$(function () {
-    $('#createGenre').submit(function (evt) {
-        //prevent the browsers default function
-        evt.preventDefault();
-        //grab the form and wrap it with jQuery
-        var form = $(this);       
-        $.post("/Genre/Create",form, function (result) {
-            $("#show").html(result);
-        });
-        return false;       
-    });
-});
 
 function getAuthor(idd) {
     var dat = parseInt(idd);

@@ -1,33 +1,34 @@
-﻿@model DataLayer.genre
+﻿@model IEnumerable<DataLayer.genre>
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Index";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>genre</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.active)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.active)
-    </div>
-</fieldset>
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}
+<div class="block">                          
+ <div class="block-content collapse in">   
+ <div class="span12"></div>
+     <div class="row">
+<div class="block-content collapse in">
+<div  class="span6 offset1">
+<input class="btn" onclick="javascript: addGenre()" type="button" value="Add"/>
+<table id="genretable" class="table table-striped">
+<thead>
+<tr><th></th><th></th><th></th></tr>
+</thead>
+<tbody>
+@foreach (var item in Model)
+{    
+    <tr><td>@Html.DisplayFor(modelItem => item.name) </td>        
+     <td><a href="javascript:deleteGenre(@item.id)"><img src="~/Content/img/drop.png" /></a></td>
+     <td><a href="javascript:editGenre(@item.id)"><img src="~/Content/img/edit.png" /></a></td>
+     </tr>
+}                                       
+</tbody>
+</table>
+</div>
+<div id="newGenre" class="span3"></div>
+</div>
+</div>
+                    </div>
+                </div>  

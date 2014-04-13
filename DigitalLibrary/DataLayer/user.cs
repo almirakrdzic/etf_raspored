@@ -30,6 +30,8 @@ namespace DataLayer
         public int type { get; set; }
         public Nullable<bool> active { get; set; }
         public byte[] image { get; set; }
+        public Nullable<bool> isConfirmed { get; set; }
+        public string confirmationToken { get; set; }
     
         public virtual ICollection<book> books { get; set; }
         public virtual user_types user_types { get; set; }

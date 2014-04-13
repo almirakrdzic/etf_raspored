@@ -11,7 +11,10 @@ namespace DigitalLibrary
             bundles.IgnoreList.Clear();
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-1.8.2.js",
+                        "~/Scripts/jquery-1.8.2.min.js",
+                        "~/Scripts/jquery-1.8.2.intellisense.js"                                            
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
                         "~/Scripts/bootstrap.min.js"));
@@ -35,13 +38,17 @@ namespace DigitalLibrary
                        "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
-                       "~/Scripts/angular.min.js"));
+                       "~/Scripts/angular.js",
+                       "~/Scripts/angular-resource.js",
+                        "~/Scripts/app.js"
+                       ));
 
             bundles.Add(new StyleBundle("~/Content/bootstrapcss").Include(
                         "~/Content/bootstrap.min.css",
                         "~/Content/jquery.easy-pie-chart.css",
                         "~/Content/uploader.css",
                         "~/Content/styles.css",
+                        "~/Content/nv.d3.css",
                         "~/Content/bootstrap-responsive.min.css"));
         }
     }

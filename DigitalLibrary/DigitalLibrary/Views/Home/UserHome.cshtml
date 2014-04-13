@@ -5,3 +5,30 @@
 @section featured {
  
 }
+
+
+<div ng-app="UserApp">
+    <div ng-controller="userCtrl">
+
+        <input type="text" ng-change="search()" ng-model="query" class="input-medium search-query" placeholder="Search" value="">
+        <button ng-click="search()" type="submit" class="btn"><i class="icon-search"></i></button>
+    <table>
+    <thead>
+        <th>Todo</th>       
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{item.Username}}</td>           
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+
+
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-resource.js"></script>
+<script src="~/Scripts/app.js"></script>
+<script src="~/Scripts/angular-route.js"></script> 

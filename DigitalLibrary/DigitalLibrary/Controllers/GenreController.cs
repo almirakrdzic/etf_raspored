@@ -19,7 +19,8 @@ namespace DigitalLibrary.Controllers
 
         public ActionResult Index()
         {
-            return View(db.genres.ToList());
+            List<DataLayer.genre> genresL = db.genres.Where(g => g.active == true).ToList();
+            return View(genresL);
         }
 
         //
@@ -46,18 +47,17 @@ namespace DigitalLibrary.Controllers
         //
         // POST: /Genre/Create
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost]       
         public ActionResult Create(genre genre)
         {
             if (ModelState.IsValid)
             {
+                genre.active = true;
                 db.genres.Add(genre);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+               return View("Delete", db.genres.Where(g => g.active == true).ToList());                
             }
-
-            return Index();
+            return View(genre);
         }
 
         //
@@ -84,7 +84,7 @@ namespace DigitalLibrary.Controllers
             {
                 db.Entry(genre).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("Delete", db.genres.Where(g => g.active == true).ToList()); 
             }
             return View(genre);
         }
@@ -93,12 +93,19 @@ namespace DigitalLibrary.Controllers
         //
         // POST: /Genre/Delete/5
         [HttpPost]        
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            genre genre = db.genres.Find(id);
-            db.genres.Remove(genre);
-            db.SaveChanges();
-            return Index();
+            try
+            {
+                DataLayer.genre genre = db.genres.Where(g => g.id == id).FirstOrDefault();
+                genre.active = false;
+                db.SaveChanges();
+                return View("Delete",db.genres.Where(g => g.active == true).ToList());
+            }
+            catch
+            {
+                return View("Delete",db.genres.Where(g => g.active == true).ToList());
+            }
         }
 
         protected override void Dispose(bool disposing)

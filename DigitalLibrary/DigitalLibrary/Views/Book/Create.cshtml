@@ -4,15 +4,12 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>book</legend>
-
+        <legend></legend>
         <div class="editor-label">
             @Html.LabelFor(model => model.title)
         </div>
@@ -52,17 +49,13 @@
             @Html.DropDownList("added_by", String.Empty)
             @Html.ValidationMessageFor(model => model.added_by)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.active)
-        </div>
+       
         <div class="editor-field">
-            @Html.EditorFor(model => model.active)
-            @Html.ValidationMessageFor(model => model.active)
+            @Html.HiddenFor(model => model.active)           
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input class="btn" type="submit" value="Create" />
         </p>
     </fieldset>
 }
