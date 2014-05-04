@@ -10,6 +10,9 @@ using System.Web.Security;
 using Recaptcha;
 using System.Threading.Tasks;
 using DigitalLibraryContracts.Helpers;
+using System.DirectoryServices;
+using System.DirectoryServices.Protocols;
+using System.Net;
 
 namespace DigitalLibrary.Controllers
 {
@@ -71,14 +74,18 @@ namespace DigitalLibrary.Controllers
           
 
             if (ModelState.IsValid)
-            {
-                Service s = new Service();
+            {               
                 try
                 {
-                    var user = s.Login(login.UserName, login.Password);
-                    Session["UserName"] = user.Username;
-                    Session["Password"] = user.Password;
+
+                    if (ValidateUser("uid=" + login.UserName + ",ou=people,dc=etf,dc=unsa,dc=ba", login.Password))
+                    {
+                    Session["UserName"] = login.UserName;
+                    Session["Password"] = login.Password;
                     FormsAuthentication.SetAuthCookie(login.UserName, login.RememberMe);
+
+                    }
+                    else RedirectToAction("Index");
                 }
                 catch
                 {
@@ -90,10 +97,9 @@ namespace DigitalLibrary.Controllers
                 {
                     return RedirectToAction("AdminHome", "Home");
                 }
-                if (Roles.IsUserInRole(login.UserName, "user"))
-                {
-                    return RedirectToAction("UserHome", "Home");                
-               }
+                
+                return RedirectToAction("UserHome", "Home");                
+              
         }
             return RedirectToAction("Index");
         }
@@ -106,6 +112,26 @@ namespace DigitalLibrary.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        private bool ValidateUser(string userName, string password)
+        {
+            bool validation;
+            try
+            {               
+                LdapConnection ldc = new LdapConnection(new LdapDirectoryIdentifier("webmail.etf.unsa.ba", 389));
+                NetworkCredential nc = new NetworkCredential(userName,password);
+                ldc.Credential = nc;
+                ldc.SessionOptions.SecureSocketLayer = false;
+                ldc.SessionOptions.ProtocolVersion = 3;
+                ldc.AuthType = AuthType.Basic;
+                ldc.Bind(nc); // user has authenticated at this point, as the credentials were used to login to the dc.                
+                validation = true;
+            }
+            catch (Exception)
+            {
+                validation = false;
+            }
+            return validation;
+        } 
        
     }
 }
