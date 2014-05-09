@@ -19,7 +19,7 @@ namespace DigitalLibraryContracts
                 Description = book.description,
                 Edition = book.edition,
                 ISBN = book.isbn,
-                Title = book.isbn,
+                Title = book.title,
                 Content = book.data
             };
             return newBook;
