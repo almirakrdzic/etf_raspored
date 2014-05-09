@@ -184,7 +184,7 @@ namespace DigitalLibraryService
                 var user = db.users.Where(us => us.username == userId).FirstOrDefault();
                 if (user == null)
                 {
-                    throw new Exception("User with selected ID does not exist!");
+                    return null;
                 }
                 newUser = user.ToContract();
             }
