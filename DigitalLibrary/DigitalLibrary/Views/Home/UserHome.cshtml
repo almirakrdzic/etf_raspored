@@ -1,29 +1,113 @@
-﻿@{
+﻿@model IEnumerable<DataLayer.book>
+@{
     ViewBag.Title = "UserHome";
 }
 
 @section featured {
- 
+
 }
 
-
 <div ng-app="UserApp">
-    <div ng-controller="userCtrl">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" ng-controller="genreCtrl">
+                <!--Sidebar content-->
 
-        <input type="text" ng-change="search()" ng-model="query" class="input-medium search-query" placeholder="Search" value="">
-        <button ng-click="search()" type="submit" class="btn"><i class="icon-search"></i></button>
-    <table>
-    <thead>
-        <th>Todo</th>       
-    </thead>
-    <tbody>
-        <tr ng-repeat="item in items">
-            <td>{{item.Username}}</td>           
-        </tr>
-    </tbody>
-</table>
+                <div ng-repeat="item in items">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+
+
+
+                        <a id="{{item.Id}}" ng-href="http://localhost:52464/Genre/Details/?id={{item.Id}}" class="thumbnail">
+
+
+                            <li><i class="icon-chevron-right"></i>
+                                <h5 style="text-align: center">{{item.Name}}</h5>
+                            </li>
+
+                        </a>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="span9" ng-controller="bookAllCtrl">
+                <!--Body content-->
+                <div class="row-fluid">
+                    <div class="block">
+                        <div class="block-content collapse in">
+
+                            <div ng-repeat="item in items" class="span3" style="margin-left: 0px;margin-top:5px;margin-right:5px;">
+
+
+                                <a id="{{item.Id}}" ng-href="http://localhost:52464/Book/Details/?id={{item.Id}}" class="thumbnail">
+
+                                    <img style="width: 260px; height: 180px;" ng-src="~/Content/img/book.png" />
+                                    <h5 style="text-align: center">{{item.Title}}</h5>
+
+                                </a>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+
+
+            <div>
+
+                <div class="span3" id="sidebar">
+                </div>
+
+                <!--/span-->
+                @* <div class="span9" id="content">         
+
+                    <div  id="show" class="row-fluid">
+                       
+                    </div>
+                </div>*@
+
+
+
+
+                <div class="row-fluid">
+
+                    <!--/span-->
+                    <div class="span3" id="content">
+
+
+
+                        <div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 </div>
+
+</div>
+
+
+
+
+
+   
+     @section Scripts{
+         @Scripts.Render("~/bundles/piechartjs")
+         @Scripts.Render("~/bundles/ajaxjs")
+         @Scripts.Render("~/bundles/adminjs")
+         @Scripts.Render("~/bundles/dmuploaderjs")
+     }
+
 
 
 
@@ -31,4 +115,4 @@
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-resource.js"></script>
 <script src="~/Scripts/app.js"></script>
-<script src="~/Scripts/angular-route.js"></script> 
+<script src="~/Scripts/angular-route.js"></script>
