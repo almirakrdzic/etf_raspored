@@ -151,7 +151,7 @@ namespace DigitalLibrary.Controllers
 
                 validation = true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 validation = false;
             }

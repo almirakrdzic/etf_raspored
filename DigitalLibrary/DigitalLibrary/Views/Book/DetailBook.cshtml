@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "DetailBook";
+}
+
+<h2>DetailBook</h2>
+@model DataLayer.book
+
+@{
+    ViewBag.Title = "Details";
+}
+          
+            <div class="row">
+           <div class="span3 offset1">
+          <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="~/Content/img/book.png" /> 
+             
+                </div>
+            <div class="span6">
+                <p><h3>@Model.title</h3></p>                          
+              <article> @Model.description</article>
+            </div>
+          </div>            
+<div class="row-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Details<span class="icon-bar"></span> <img src="~/Content/img/glyphicons_432_plus.png"; background-repeat: no-repeat; background-position: 6px center/> </span>
+     
+      </button>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+      <div class="row">
+           <div class="span3 offset1">            
+            <p style="text-align:left"><b>Added by: </b></p>    
+            <p style="text-align:left"><b>Edition: </b></p>
+            <p style="text-align:left"><b>ISBN: </b></p> 
+            <p style="text-align:left"><b>Authors: </b></p>                       
+            </div>
+            <div class="span3">            
+            <p style="text-align:left"><a style="font-family:sans-serif;color:GrayText"> @Model.user.first_name @Model.user.last_name</a></p>    
+            <p style="text-align:left;font-family:sans-serif;color:GrayText"> @Model.edition</p>
+            <p style="text-align:left;font-family:sans-serif;color:GrayText"> @Model.isbn</p>           
+                 @foreach(DataLayer.author a in Model.authors)
+                 {
+                   <a style="font-family:sans-serif;color:GrayText">@a.first_name @a.last_name </a><b>&nbsp;</b>
+                  }                                   
+            </div>
+           </div> 
+      
+    </div><!-- /.navbar-collapse -->
+  </div>
+          <hr />                 
+          <hr/>   
+          <div class="row">
+            <div class="span10">             
+              <div class="span3">              
+                <a class="btn btn-large btn-block" href="javascript:updateBook(@Model.id)">Edit</a>
+              </div>             
+              <div class="span3">               
+                <a class="btn btn-large btn-block" href="javascript:deleteBook(@Model.id)">Delete</a>
+              </div>              
+            </div>
+          </div>
+
+ 
+        
+

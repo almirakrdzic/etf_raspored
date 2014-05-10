@@ -17,7 +17,7 @@ namespace DigitalLibrary
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
-                        "~/Scripts/bootstrap.min.js"));
+                        "~/Scripts/bootstrap.js"));
 
              bundles.Add(new ScriptBundle("~/bundles/piechartjs").Include(
                         "~/Scripts/jquery.easy-pie-chart.js"));
@@ -47,7 +47,7 @@ namespace DigitalLibrary
                         "~/Content/bootstrap.min.css",
                         "~/Content/jquery.easy-pie-chart.css",
                         "~/Content/uploader.css",
-                        "~/Content/styles.css",
+                        "~/Content/styles.css",                        
                         "~/Content/nv.d3.css",
                         "~/Content/bootstrap-responsive.min.css"));
         }

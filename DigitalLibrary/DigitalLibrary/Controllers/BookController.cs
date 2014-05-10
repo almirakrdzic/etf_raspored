@@ -9,7 +9,7 @@ using DataLayer;
 
 namespace DigitalLibrary.Controllers
 {
-    [Authorize(Roles = "administrator")]
+    [Authorize(Roles = "administrator,user")]
     public class BookController : BaseController
     {
         private DatabaseEntities db = new DatabaseEntities();
@@ -35,6 +35,25 @@ namespace DigitalLibrary.Controllers
                 return HttpNotFound();
             }
             return View(book);
+        }
+
+
+        public ActionResult DetailBook(int id = 0)
+        {
+            book book = db.books.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+            return View(book);
+        }
+
+
+        public ActionResult GenreCategory(int id = 0)
+        {
+            DigitalLibraryService.Service s = new DigitalLibraryService.Service();
+            List<DigitalLibraryContracts.Book> books = s.GetBooksForGenre(id.ToString());
+            return View(books);
         }
 
         //
