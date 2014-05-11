@@ -1,17 +1,27 @@
-﻿var UserApp = angular.module('UserApp', ['ngResource', 'ngRoute', 'ui.bootstrap']).
+﻿
+var url = 'http://localhost:52464/api/user/?query=';
+var url1 = 'http://localhost:52464/api/genre';
+var url2 = 'http://localhost:52464/api/book/?query=';
+var allBooks = 'http://localhost:52464/api/book';
+var bookByGenre = 'http://localhost:52464/api/genre/?id=';
+var book = 'http://localhost:52464/api/book/?id=';
+
+var UserApp = angular.module('UserApp', ['ngResource', 'ngRoute', 'ui.bootstrap']).
  config(function ($routeProvider) {
      $routeProvider
-     .when("/book/details/:id", {
-         templateUrl: function ($routeParams) { return "http://localhost:52464/Book/Details/?id=" + $routeParams.id; }
+     .when("/book/details/:bookid", {
+         templateUrl: "http://localhost:52464/User/BookDetails",
+         controller: "bookDetails"
      })
-     .when("/", { templateUrl: "http://localhost:52464/Book/Index" })
+      .when("/", {
+          templateUrl: "http://localhost:52464/User/BookIndex",
+          controller:"bookAllCtrl"
+      })
       .when("/genre/books/:genreid", {
-          templateUrl: function ($routeParams) { return "http://localhost:52464/Book/GenreCategory/?id=" + $routeParams.genreid; }
+          templateUrl: "http://localhost:52464/User/BookIndex",
+          controller: "bookByGenreCtrl"
       })
  });
-var url = 'http://localhost:52464/api/user/?query=';
-var url1 = 'http://localhost:52464/api/genre/?query=';
-var url2 = 'http://localhost:52464/api/book/?query=';
 
 //the factory object for the webAPI call.
 UserApp.factory('userRepository', function ($http) {
@@ -27,19 +37,27 @@ UserApp.factory('userRepository', function ($http) {
 //the factory object for the webAPI call.
 UserApp.factory('genreRepository', function ($http) {
     return {
-        getGenres: function (query, callback) {
+        getGenres: function (callback) {
 
-            $http.get(url1 + query).success(callback);
+            $http.get(url1).success(callback);
         }
     }
 });
 
 //the factory object for the webAPI call.
 UserApp.factory('bookRepository', function ($http) {
-    return {
-        getBooks: function (query, callback) {
+    return {       
+        getAllBooks: function (callback) {
 
-            $http.get(url2 + query).success(callback);
+        $http.get(allBooks).success(callback);
+        },
+        getBooksByGenres: function (id,callback) {
+
+            $http.get(bookByGenre + id).success(callback);
+        },
+        getBook: function (id, callback) {
+
+            $http.get(book + id).success(callback);
         }
     }
 });
@@ -61,7 +79,7 @@ UserApp.controller('userCtrl', function ($scope, userRepository) {
 //controller 
 UserApp.controller('genreCtrl', function ($scope, genreRepository) {
     function getGenres() {
-        genreRepository.getGenres($scope.query, function (results) {
+        genreRepository.getGenres(function (results) {
             $scope.items = results;
         })
     };
@@ -71,34 +89,69 @@ UserApp.controller('genreCtrl', function ($scope, genreRepository) {
     };
 });
 
-
+var data = [];
 //controller   
 UserApp.controller('bookAllCtrl', function ($scope, bookRepository) {
+       
+    $scope.books = []
+    $scope.booksSize = 0;
+    function getAllBooks() {
+        bookRepository.getAllBooks(function (results) {
+            data = results;
+            data1 = data;
+            $scope.books = data1.slice(0,$scope.itemsPerPage);
+            $scope.booksSize = results.length;
+        })
+    };
+    getAllBooks();
+    $scope.search = function () {
+        getAllBooks();
+    };   
+    
+    $scope.maxSize = 5;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 4;   
+    $scope.$watch("currentPage", function (newValue, oldValue) {
+        data1 = data;
+        offset = (newValue-1) * $scope.itemsPerPage;
+        limit = $scope.itemsPerPage;
+        $scope.books = data1.slice(offset, offset + limit);        
+    });   
+});
+
+UserApp.controller('bookByGenreCtrl', function ($scope, bookRepository, $routeParams) {
+    $scope.books = [];
+    $scope.booksSize = 0;
     function getBooks() {
-        bookRepository.getBooks($scope.query, function (results) {
-            $scope.items = results;
+        bookRepository.getBooksByGenres($routeParams.genreid, function (results) {
+            data = results;
+            data1 = data;
+            $scope.books = data1.slice(0, $scope.itemsPerPage);
+            $scope.booksSize = results.length;
         })
     };
     getBooks();
-    $scope.search = function () {
-        getBooks();
-    };
-
-    $scope.totalItems = 64;
-    $scope.currentPage = 4;
-
-    $scope.setPage = function (pageNo) {
-        $scope.currentPage = pageNo;
-    };
-
-    $scope.pageChanged = function () {
-        console.log('Page changed to: ' + $scope.currentPage);
-    };
-
     $scope.maxSize = 5;
-    $scope.bigTotalItems = 175;
-    $scope.bigCurrentPage = 1;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 4;
+    $scope.$watch("currentPage", function (newValue, oldValue) {
+        data1 = data;
+        offset = (newValue - 1) * $scope.itemsPerPage;
+        limit = $scope.itemsPerPage;
+        $scope.books = data1.slice(offset, offset + limit);
+    });
 });
 
+UserApp.controller('bookDetails', function ($scope, bookRepository, $routeParams) {
+    function getBook() {
+        bookRepository.getBook($routeParams.bookid, function (results) {
+            $scope.book = results;
+        })
+    };
+    getBook();
 
-
+    $scope.Userrate = 0;
+    $scope.rate =7;
+    $scope.max = 10;
+    $scope.isReadonly = false;  
+});

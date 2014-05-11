@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "BookDetails";
+}
+
+ <div class="col-lg-3">
+     
+     <img src="~/Content/img/book.png" />
+     <br />
+     <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-download fa-fw"></i>Download</button>
+     <br />
+      <p class="text-muted">Rate this book:<br />   
+     <rating ng-model="Userrate" max="10" state-on="'fa fa-star fa-fw'" state-off="'fa fa-star-o fa-fw'" readonly="false"></rating>
+     </p>
+ </div>  
+
+<div class="col-lg-6">
+     
+    <h3>{{book.Title}}
+      <br />
+      <small>by</small>            
+      </h3>   
+     <rating ng-model="rate" max="10" state-on="'fa fa-star fa-fw'" state-off="'fa fa-star-o fa-fw'" readonly="true"></rating>
+     <br /><br />
+    <p>
+        {{book.Description}}
+    </p>
+    <br />
+    <hr />
+    <dl class="dl-horizontal">
+    <dt>Edition:</dt><dd> {{book.Edition}}</dd>
+    <dt>ISBN:</dt><dd> {{book.ISBN}}</dd>
+    </dl>
+    <br />
+    <hr />
+ </div>

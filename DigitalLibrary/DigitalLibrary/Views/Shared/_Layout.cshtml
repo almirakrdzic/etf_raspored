@@ -5,47 +5,39 @@
         <meta name="viewport" content="width=device-width" />
         <title>Digital repository</title>
         <!--<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />-->       
-        
-        @Styles.Render("~/Content/bootstrapcss")
-        @Styles.Render("~/Content/css")
- @Scripts.Render("~/bundles/modernizr")
- @Scripts.Render("~/bundles/jquery")
-        <style>
-            .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-        </style>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet" /> 
+        <link href="~/Content/sb-admin.css" rel="stylesheet" />
+        <link href="~/Content/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
     </head>
     <body>
-  <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                    </a>                    
-                    <a style="color:black" class="brand" href="#">Digital Library</a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav pull-right">
-                            @Html.Partial("_LoginPartial")                            
-                        </ul>                       
-                    </div>
-                    <!--/.nav-collapse -->
-                </div>
+    <div id="wrapper">
+        <nav  class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navbar-header">               
+                <a style="color:black" class="navbar-brand" href="#">Digital repository</a>
             </div>
-        </div>  
-        
- <div class="container-fluid">
- <div class="row-fluid">
-  <div class="span12">
- @RenderSection("featured", required: false)
- <div class="row-fluid">
- @RenderBody()
- </div>
- </div>
- </div>
- </div>
- @Scripts.Render("~/bundles/jquery")
- @Scripts.Render("~/bundles/bootstrapjs")       
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">               
+              
+               @Html.Partial("_LoginPartial")
+            </ul>	
+           
+        </nav>       
+            <div style="background-color:white" class="col-md-12">
+               
+                  @RenderBody()
+               
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->      
+        <!-- /#page-wrapper -->
+    </div>        
 @RenderSection("scripts", required: false)
-        
+@RenderSection("featured", required: false)
+ <script src="~/Scripts/plugins/metisMenu/jquery.metisMenu.js"></script>
+ <script src="~/Scripts/jquery-1.10.2.js"></script>
+ <script src="~/Scripts/bootstrap.min.js"></script>
+ <script src="~/Scripts/sb-admin.js"></script>
+<script src="~/Scripts/index.js"></script>
 </body>
 </html>

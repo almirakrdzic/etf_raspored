@@ -7,36 +7,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section id="loginForm">
+<section style="align-items:center" id="loginForm">
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend></legend>
-        <ul style="list-style-type:none">
-            <li>
+    @Html.ValidationSummary(true)   
+              
+            <div class="form-group">
                 @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName,new { Class = "form-control" } )
                 @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
+            </div>
+           <div class="form-group">
                 @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password,new { Class = "form-control"  })
                 @Html.ValidationMessageFor(m => m.Password)
-            </li>     
-             <li>
+           </div>    
+             <div class="checkbox">
                 @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>           
-                              
-        </ul>
+                @Html.LabelFor(m => m.RememberMe)
+            </div>           
+           <div class="form-group">
+             <input type="submit" class="btn btn-default" value="Log in" />
+            </div>     
      
-        <input type="submit" class="btn btn-large bottom-space" value="Log in" />
-    </fieldset>
-    <p>
-        <a href="http://localhost:52464/User/Create">Register</a> if you don't have an account.
-    </p>
+   
 }
 </section>
 

@@ -47,7 +47,7 @@ namespace DigitalLibrary
                         "~/Content/bootstrap.min.css",
                         "~/Content/jquery.easy-pie-chart.css",
                         "~/Content/uploader.css",
-                        "~/Content/styles.css",                        
+                        "~/Content/sb-admin.css",                        
                         "~/Content/nv.d3.css",
                         "~/Content/bootstrap-responsive.min.css"));
         }

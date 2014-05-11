@@ -174,5 +174,15 @@ namespace DigitalLibrary.Controllers
             return File(user.Image, "image/jpg");
         }
 
+        public ActionResult BookIndex()
+        {
+            return View();
+        }
+
+        public ActionResult BookDetails()
+        {
+            return View();
+        }
+
     }
 }

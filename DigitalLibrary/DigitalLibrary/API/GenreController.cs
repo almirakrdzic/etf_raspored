@@ -21,12 +21,13 @@ namespace DigitalLibrary.API
         }
 
         // GET api/genre/5
-        public Genre Get(int id)
+        public List<Book> Get(int id)
         {
+            List<Book> books = new List<Book>();
             Service service = new Service();
-            Genre genre = service.GetGenreWithId(Convert.ToString(id));
-            return genre;
-        }
+            books = service.GetBooksForGenre(id.ToString());
+            return books;
+        }       
 
         // POST api/genre
         public HttpResponseMessage Post([FromBody]Genre genre)

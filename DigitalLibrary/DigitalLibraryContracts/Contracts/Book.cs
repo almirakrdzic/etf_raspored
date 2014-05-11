@@ -24,7 +24,5 @@ namespace DigitalLibraryContracts
         [DataMember]
         public User AddedBy { get; set; }
 
-
-
     }
 }

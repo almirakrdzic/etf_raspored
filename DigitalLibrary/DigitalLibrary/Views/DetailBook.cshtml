@@ -1,0 +1,73 @@
+﻿@model DataLayer.book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div ng-app="UserApp">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" ng-controller="genreCtrl">
+                <!--Sidebar content-->
+
+                <div ng-repeat="item in items">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+
+
+
+                        <a id="{{item.Id}}" ng-href="http://localhost:52464/Genre/Details/?id={{item.Id}}" class="thumbnail">
+
+
+                            <li><i class="icon-chevron-right"></i>
+                                <h5 style="text-align: center">{{item.Name}}</h5>
+                            </li>
+
+                        </a>
+
+                    </ul>
+                </div>
+            </div>
+
+                <div class="span9" ng-controller="bookDetailCtrl">
+                <!--Body content-->
+                <div class="row-fluid">
+                    <div class="block">
+                        <div class="block-content collapse in">
+
+                            <div ng-repeat="item in items" class="span3" style="margin-left: 0px; margin-top: 5px; margin-right: 5px;">
+
+
+                                <div class="row">
+                                    <div class="span3 offset1">
+                                        <p style="text-align: left"><b>Added by: </b></p>
+                                        <p style="text-align: left"><b>Edition: </b></p>
+                                        <p style="text-align: left"><b>ISBN: </b></p>
+                                        <p style="text-align: left"><b>Authors: </b></p>
+                                    </div>
+                                    <div class="span3">
+                                        <p style="text-align: left"><a style="font-family: sans-serif; color: GrayText">{{item.AddedBy}}</a></p>
+                                        <p style="text-align: left; font-family: sans-serif; color: GrayText">{{item.Edtion}}</p>
+                                        <p style="text-align: left; font-family: sans-serif; color: GrayText">{{item.ISBN}}</p>
+                                        @foreach (DataLayer.author a in Model.authors)
+                                        {
+                                            <a style="font-family: sans-serif; color: GrayText">@a.first_name @a.last_name </a><b>&nbsp;</b>
+                                         }
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    </div>
+
+ 
+        
+

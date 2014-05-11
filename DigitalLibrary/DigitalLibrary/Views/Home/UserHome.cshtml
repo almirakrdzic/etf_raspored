@@ -6,69 +6,35 @@
 @section featured {
 
 }
-
-<div ng-app="UserApp">
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span3" ng-controller="genreCtrl">
-                <!--Sidebar content-->
-
-                <div ng-repeat="item in items">
-                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-
-
-
-                        <a id="{{item.Id}}" ng-href="#/genre/books/{{item.Id}}" class="thumbnail">
-
-                            <li><i class="icon-chevron-right"></i>
-                                <h5 style="text-align: center">{{item.Name}}</h5>
-                            </li>
-
-                        </a>
-
+ <div ng-app="UserApp" class="col-lg-12">
+     <div  id="page-wraper">
+         <div class="row">
+            <div ng-controller="genreCtrl" class="col-lg-3"> 
+            <div  class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul ng-repeat="item in items" class="nav" id="side-menu">                       
+                        <li>
+                            <a style="color:black" href="#/genre/books/{{item.Id}}"><b>{{item.Name}}</b></a>
+                        </li>                       
                     </ul>
+                    <!-- /#side-menu -->
                 </div>
+                <!-- /.sidebar-collapse -->
+            </div>    
             </div>
-            <div class="span9" ng-controller="bookAllCtrl">
-                <div class="row-fluid">
-
-                    <input type="text" ng-change="search()" ng-model="query" class="input-medium search-query" placeholder="Search" value="">
-                    <button ng-click="search()" type="submit" class="btn"><i class="icon-search"></i></button>
-
-                    <ng-view>  </ng-view>                   
-
-
-                        <pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-
-                        <pre>The selected page no: {{currentPage}}</pre>
-
-
-
-                   
-
-                </div>
-
+                <div class="col-lg-9">
+                    <div class="row"> <div class="col-lg-12"><br /></div></div>                           
+                   <div class="panel panel-default">
+                    <div class="panel-heading"></div>
+                    <div class="panel-body">             
+                  <ng-view></ng-view>
+                 </div></div>
+                  </div>
+                
             </div>
+            <!-- /.row -->        
         </div>
-    </div>
 </div>
-
-
-
-
-
-
-
-
-@section Scripts{
-    @Scripts.Render("~/bundles/piechartjs")
-    @Scripts.Render("~/bundles/ajaxjs")
-    @Scripts.Render("~/bundles/adminjs")
-    @Scripts.Render("~/bundles/dmuploaderjs")
-}
-
-
-
 
 
 <script src="~/Scripts/angular.js"></script>
