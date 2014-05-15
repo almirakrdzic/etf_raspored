@@ -699,6 +699,7 @@
     <Content Include="Views\Book\GenreCategory.cshtml" />
     <Content Include="Views\User\BookIndex.cshtml" />
     <Content Include="Views\User\BookDetails.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

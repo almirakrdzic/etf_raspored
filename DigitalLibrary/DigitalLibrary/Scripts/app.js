@@ -5,6 +5,7 @@ var url2 = 'http://localhost:52464/api/book/?query=';
 var allBooks = 'http://localhost:52464/api/book';
 var bookByGenre = 'http://localhost:52464/api/genre/?id=';
 var book = 'http://localhost:52464/api/book/?id=';
+var userDetails = 'http://localhost:52464/api/user/?id=';
 
 var UserApp = angular.module('UserApp', ['ngResource', 'ngRoute', 'ui.bootstrap']).
  config(function ($routeProvider) {
@@ -21,7 +22,12 @@ var UserApp = angular.module('UserApp', ['ngResource', 'ngRoute', 'ui.bootstrap'
           templateUrl: "http://localhost:52464/User/BookIndex",
           controller: "bookByGenreCtrl"
       })
+     .when("/user/userprofile/:userid", {
+         templateUrl: "http://localhost:52464/User/UserProfile",
+         controller: "userProfileCtrl"
+     })
  });
+
 
 //the factory object for the webAPI call.
 UserApp.factory('userRepository', function ($http) {
@@ -29,9 +35,14 @@ UserApp.factory('userRepository', function ($http) {
         getUsers: function (query, callback) {
 
             $http.get(url + query).success(callback);
+        },
+        getUser: function (id, callback) {
+
+            $http.get(userDetails + id).success(callback);
         }
     }
 });
+
 
 
 //the factory object for the webAPI call.
@@ -75,6 +86,15 @@ UserApp.controller('userCtrl', function ($scope, userRepository) {
     };
 });
 
+
+UserApp.controller('userProfileCtrl', function ($scope, userRepository, $routeParams) {
+    function getUser() {
+        userRepository.getUser($routeParams.userid, function (results) {
+            $scope.userDetails = results;
+        })
+    };
+    getUser();
+});
 
 //controller 
 UserApp.controller('genreCtrl', function ($scope, genreRepository) {

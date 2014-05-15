@@ -148,6 +148,7 @@ namespace DigitalLibrary.Controllers
 
         }
 
+
         public ActionResult PromoteUser(int id)
         {
             var db = new DataLayer.DatabaseEntities();
@@ -180,6 +181,12 @@ namespace DigitalLibrary.Controllers
         }
 
         public ActionResult BookDetails()
+        {
+            return View();
+        }
+
+
+        public ActionResult UserProfile()
         {
             return View();
         }

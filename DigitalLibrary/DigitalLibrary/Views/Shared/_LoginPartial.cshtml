@@ -1,12 +1,12 @@
 ﻿
 @if (Request.IsAuthenticated) {
-    
+   
     <li class="dropdown">
     <a href="#" style="color:black" role="button" class="dropdown-toggle" data-toggle="dropdown"> 
        <i class="fa fa-user fa-fw"></i>
          @User.Identity.Name <i class="caret"></i></a>
-    <ul class="dropdown-menu dropdown-user">
-    <li><a style="color:gray" href="javascript:editprofile()" id="EditProfile"><i class="fa fa-user fa-fw"></i> User profile</a></li>
+    <ul class="dropdown-menu dropdown-user" ng-controller="userProfileCtrl">
+    <li><a style="color:gray" href="#/User/UserProfile/@User.Identity.Name"><i class="fa fa-user fa-fw"></i> User profile</a></li>
     <li>
          @using (Html.BeginForm("LogOff", "Home", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()            
@@ -30,6 +30,10 @@
            
                     </ul>
                      </li>   
-} 
+}
 
-    
+ <script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-resource.js"></script>
+<script src="~/Scripts/app.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-0.11.0.min.js"></script>    
