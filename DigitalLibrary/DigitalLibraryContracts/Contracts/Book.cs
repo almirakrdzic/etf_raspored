@@ -23,6 +23,7 @@ namespace DigitalLibraryContracts
         public byte[] Content { get; set; }
         [DataMember]
         public User AddedBy { get; set; }
-
+        [DataMember]
+        public int Rate { get; set; }
     }
 }

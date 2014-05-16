@@ -8,9 +8,12 @@
      <br />
      <button type="button" class="btn btn-primary btn-lg btn-block"><i class="fa fa-download fa-fw"></i>Download</button>
      <br />
-      <p class="text-muted">Rate this book:<br />   
-     <rating ng-model="Userrate" max="10" state-on="'fa fa-star fa-fw'" state-off="'fa fa-star-o fa-fw'" readonly="false"></rating>
-     </p>
+      <p class="text-muted">Rate this book:<br />
+          
+           <rating ng-model="Userrate" max="10" state-on="'fa fa-star fa-fw'" state-off="'fa fa-star-o fa-fw'" readonly="false"></rating>   
+       <button class="btn btn-sm btn-danger" ng-click="Userrate = 0" ng-disabled="isReadonly">Clear</button>
+    <input type="button" class="btn btn-default" data-ng-click ="rate()" value="Rate" />
+      </p>
  </div>  
 
 <div class="col-lg-6">

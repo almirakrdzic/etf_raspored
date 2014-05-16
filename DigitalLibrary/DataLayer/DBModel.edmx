@@ -107,6 +107,7 @@
           <Property Name="data" Type="varbinary(max)" />
           <Property Name="added_by" Type="int" Nullable="false" />
           <Property Name="active" Type="bit" />
+          <Property Name="rate" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'digital_library.dbo.downloaded_books' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -307,6 +308,7 @@
           <NavigationProperty Name="genres" Relationship="digital_libraryModel.book_genre" FromRole="books" ToRole="genre" />
           <NavigationProperty Name="users" Relationship="digital_libraryModel.downloaded_books" FromRole="books" ToRole="users" />
           <Property Type="Boolean" Name="active" />
+          <Property Type="Int32" Name="rate" />
         </EntityType>
         <EntityType Name="genre">
           <Key>
@@ -403,6 +405,7 @@
           <EntitySetMapping Name="books">
             <EntityTypeMapping TypeName="digital_libraryModel.book">
               <MappingFragment StoreEntitySet="books">
+                <ScalarProperty Name="rate" ColumnName="rate" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />

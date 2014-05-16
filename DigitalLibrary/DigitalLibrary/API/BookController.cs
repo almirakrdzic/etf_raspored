@@ -28,6 +28,17 @@ namespace DigitalLibrary.API
 
         }
 
+        // GET api/book/5
+        public Book Rate(int rate,int id)
+        {
+            Service service = new Service();
+            Book book = service.GetBookWithId(Convert.ToString(id));
+            book.Rate = rate;
+
+            return book;
+
+        }
+
         // POST api/book
         public HttpResponseMessage Post([FromBody]Book book)
         {

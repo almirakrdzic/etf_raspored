@@ -173,5 +173,11 @@ UserApp.controller('bookDetails', function ($scope, bookRepository, $routeParams
     $scope.Userrate = 0;
     $scope.rate =7;
     $scope.max = 10;
-    $scope.isReadonly = false;  
+    $scope.isReadonly = false;
+    $scope.rate = function rate() {
+        bookRepository.rateBook($scope.Userrate, $scope.book.id, function (results) {
+            $scope.book = results;
+        })
+    };
+
 });

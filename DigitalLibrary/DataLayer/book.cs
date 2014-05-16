@@ -11,8 +11,7 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class book
     {
         public book()
@@ -21,26 +20,17 @@ namespace DataLayer
             this.genres = new HashSet<genre>();
             this.users = new HashSet<user>();
         }
-
+    
         public int id { get; set; }
-
-        [Display(Name = "Title")]
-        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "TitleRequired")]
         public string title { get; set; }
-
-
-        [Display(Name = "ISBN")]
-        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "ISBNRequired")]
         public string isbn { get; set; }
         public string edition { get; set; }
         public string description { get; set; }
         public byte[] data { get; set; }
-
-        [Display(Name = "User")]
-        [Required(ErrorMessageResourceType = (typeof(Localization.Error)), ErrorMessageResourceName = "UserAddedRequired")]
         public int added_by { get; set; }
         public Nullable<bool> active { get; set; }
-
+        public Nullable<int> rate { get; set; }
+    
         public virtual user user { get; set; }
         public virtual ICollection<author> authors { get; set; }
         public virtual ICollection<genre> genres { get; set; }
